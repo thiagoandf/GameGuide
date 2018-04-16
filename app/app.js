@@ -7,6 +7,9 @@
 
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // Import all the third party stuff
 import React from 'react';
@@ -45,6 +48,7 @@ import { translationMessages } from './i18n';
 // Import CSS reset and Global Styles
 import './global-styles';
 
+
 // Create redux store with history
 const initialState = {};
 const history = createHistory();
@@ -56,7 +60,9 @@ const render = (messages) => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            <App />
+          </MuiThemeProvider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
