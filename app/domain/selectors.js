@@ -4,12 +4,12 @@ const selectDomain = (state) => state.get('domain');
 
 const makeSelectGameList = () => createSelector(
   selectDomain,
-  (domain) => domain.games && domain.games.toJS()
+  (domain) => domain.get('games').toJS()
 );
 
 const makeSelectPlayer = () => createSelector(
   selectDomain,
-  (domain) => domain.player && domain.player.toJS()
+  (domain) => domain.get('player').toJS()
 );
 
 export default selectDomain;
