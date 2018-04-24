@@ -3,11 +3,16 @@ export const getGameList = () =>
     {
       id: 1,
       name: 'Tokaido',
-      image: 'image/tokaido.jpg',
     },
     {
       id: 2,
       name: '7 Wonders',
-      image: 'image/tokaido.jpg',
+    },
+    {
+      id: 3,
+      name: 'Takenoko',
     },
   ]);
+
+export const postLikeGame = () =>
+  Promise.resolve();

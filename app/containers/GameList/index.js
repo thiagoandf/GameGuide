@@ -7,9 +7,9 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import reducer from 'domain/reducer';
 import { makeSelectGameList, makeSelectPlayer } from 'domain/selectors';
-import { requestGameList } from 'domain/actions';
-import saga from 'domain/sagas/requestGameList';
+import { requestGameList, likeGame } from 'domain/actions';
 
+import saga from './saga';
 import GameList from './GameList';
 
 const mapStateToProps = createStructuredSelector({
@@ -19,6 +19,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   requestGameList: () => dispatch(requestGameList()),
+  likeGame: (id) => dispatch(likeGame(id)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
