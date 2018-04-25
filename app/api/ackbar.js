@@ -12,7 +12,18 @@ export const getGameList = () =>
       id: 3,
       name: 'Takenoko',
     },
+    {
+      id: 4,
+      name: '7 Wonders Duel',
+    },
+    {
+      id: 5,
+      name: 'Hanabi',
+    },
   ]);
 
 export const postLikeGame = () =>
   Promise.resolve();
+
+export const getRecommendations = () =>
+  Promise.resolve([4, 5]);

@@ -1,19 +1,22 @@
 import { createSelector } from 'reselect';
 
 const selectDomain = (state) => state.get('domain');
+const selectGames = createSelector(selectDomain, (domain) => domain.get('games'));
+const selectPlayer = createSelector(selectDomain, (domain) => domain.get('player'));
+const selectRecommendationIds = createSelector(selectPlayer, (player) => player.get('recommendedGames'));
 
-const makeSelectGameList = () => createSelector(
+export const makeSelectGameList = () => createSelector(
   selectDomain,
   (domain) => domain.get('games').toJS()
 );
 
-const makeSelectPlayer = () => createSelector(
+export const makeSelectPlayer = () => createSelector(
   selectDomain,
   (domain) => domain.get('player').toJS()
 );
 
-export default selectDomain;
-export {
-  makeSelectGameList,
-  makeSelectPlayer,
-};
+export const makeSelectRecommendations = () => createSelector(
+  selectGames,
+  selectRecommendationIds,
+  (games, recommendations) => games.filter((game) => recommendations.has(game.id)).toJS(),
+);
