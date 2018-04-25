@@ -6,7 +6,7 @@ const initialState = fromJS({
 });
 
 function gameReducer(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
     default:
       return state;
   }
