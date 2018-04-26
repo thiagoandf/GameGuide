@@ -27,3 +27,6 @@ export const postLikeGame = () =>
 
 export const getRecommendations = () =>
   Promise.resolve([4, 5]);
+
+export const postLogin = () =>
+  Promise.resolve({ token: 'jrrtolkien' });

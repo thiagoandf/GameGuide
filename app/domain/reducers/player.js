@@ -1,8 +1,15 @@
 import { Map, Set } from 'immutable';
-import { UPDATE_LIKED_GAMES, LOAD_RECOMMENDATIONS } from '../constants';
+import {
+  UPDATE_LIKED_GAMES,
+  LOAD_RECOMMENDATIONS,
+  LOAD_TOKEN,
+  UPDATE_LOGIN_EMAIL,
+  UPDATE_LOGIN_PASSWORD,
+} from '../constants';
 
 const initialState = Map({
-  username: '',
+  email: '',
+  password: '',
   token: '',
   likedGames: Set(),
   dislikedGames: Set(),
@@ -15,6 +22,12 @@ function playerReducer(state = initialState, action) {
       return state.update('likedGames', (set) => set.add(action.gameId));
     case LOAD_RECOMMENDATIONS:
       return state.set('recommendedGames', Set(action.recommendations));
+    case UPDATE_LOGIN_EMAIL:
+      return state.set('email', action.email);
+    case UPDATE_LOGIN_PASSWORD:
+      return state.set('password', action.password);
+    case LOAD_TOKEN:
+      return state.set('token', action.token);
     default:
       return state;
   }

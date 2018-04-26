@@ -6,14 +6,17 @@ const selectPlayer = createSelector(selectDomain, (domain) => domain.get('player
 const selectRecommendationIds = createSelector(selectPlayer, (player) => player.get('recommendedGames'));
 
 export const makeSelectGameList = () => createSelector(
-  selectDomain,
-  (domain) => domain.get('games').toJS()
+  selectGames,
+  (games) => games.toJS()
 );
 
 export const makeSelectPlayer = () => createSelector(
-  selectDomain,
-  (domain) => domain.get('player').toJS()
+  selectPlayer,
+  (player) => player.toJS()
 );
+
+export const selectPlayerEmail = createSelector(selectPlayer, (player) => player.get('email'));
+export const selectPlayerPassword = createSelector(selectPlayer, (player) => player.get('password'));
 
 export const makeSelectRecommendations = () => createSelector(
   selectGames,
