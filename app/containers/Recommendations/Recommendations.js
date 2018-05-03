@@ -11,7 +11,11 @@ const Recommendations = (props) => (
     <FlatButton label="Logout" onClick={props.logout} />
     <List>
       {props.recommendedGames.map((game) =>
-        <ListItem key={game.id} primaryText={game.name} />)}
+        (<ListItem
+          key={game.id}
+          primaryText={game.name}
+          onClick={() => props.goToGameDetail(game.id)}
+        />))}
     </List>
   </div>
 );
@@ -22,6 +26,7 @@ Recommendations.propTypes = {
   requestRecommendations: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
+  goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
 };
 
 export default Recommendations;

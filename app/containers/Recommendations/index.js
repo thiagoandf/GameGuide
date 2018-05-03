@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
   requestGameList: () => dispatch(requestGameList()),
   requestRecommendations: () => dispatch(requestRecommendations()),
   goToGameList: () => dispatch(push('/games')),
+  goToGameDetail: (gameId) => dispatch(push(`/game/${gameId}`)),
   logout: () => dispatch(push('/')),
 });
 
