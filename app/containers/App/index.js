@@ -5,6 +5,8 @@ import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GameList from 'containers/GameList/Loadable';
 import Recommendations from 'containers/Recommendations/Loadable';
+import GameDetail from 'containers/GameDetail/Loadable';
+import Signup from 'containers/Signup/Loadable';
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/games" component={GameList} />
         <Route path="/recommendations" component={Recommendations} />
+        <Route path="/game/:id" component={GameDetail} />
+        <Route path="/signup" component={Signup} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

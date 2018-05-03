@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -20,6 +21,9 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   requestGameList: () => dispatch(requestGameList()),
   likeGame: (id) => dispatch(likeGame(id)),
+  goToRecommendations: () => dispatch(push('/recommendations')),
+  goToGameDetail: (gameId) => dispatch(push(`/game/${gameId}`)),
+  logout: () => dispatch(push('/')),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

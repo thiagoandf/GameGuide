@@ -49,6 +49,7 @@ const HomePage = (props) => {
           onChange={handleOnChangePassword}
         /><br />
         <RaisedButton label="Login" style={elementStyle} onClick={props.tryLogin} />
+        <RaisedButton label="Signup" style={elementStyle} onClick={props.goToSignup} />
       </Paper>
     </div>
   );
@@ -60,6 +61,7 @@ HomePage.propTypes = {
   onChangeEmail: PropTypes.func.isRequired, // eslint-disable-line
   onChangePassword: PropTypes.func.isRequired,
   tryLogin: PropTypes.func.isRequired,
+  goToSignup: PropTypes.func.isRequired,
 };
 
 export default HomePage;

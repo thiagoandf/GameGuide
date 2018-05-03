@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -20,6 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeEmail: (email) => dispatch(updateLoginEmail(email)),
   onChangePassword: (password) => dispatch(updateLoginPassword(password)),
   tryLogin: (email, password) => dispatch(tryLogin(email, password)),
+  goToSignup: () => dispatch(push('/signup')),
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

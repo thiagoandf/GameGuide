@@ -9,6 +9,8 @@ import TokaidoImage from 'images/tokaido.jpg';
 const GameList = (props) => (
   <div>
     <FlatButton label="Request game list" onClick={props.requestGameList} />
+    <FlatButton label="Go to recommendations" onClick={props.goToRecommendations} />
+    <FlatButton label="Logout" onClick={props.logout} />
     <GridList
       cellHeight={180}
     >
@@ -16,6 +18,7 @@ const GameList = (props) => (
         <GridTile
           key={game.id}
           title={game.name}
+          onClick={() => props.goToGameDetail(game.id)}
           actionIcon={<IconButton><ThumbUp color="white" onClick={() => props.likeGame(game.id)} /></IconButton>}
         >
           <img src={TokaidoImage} alt="cool game" />
@@ -28,7 +31,10 @@ const GameList = (props) => (
 GameList.propTypes = {
   gameList: PropTypes.arrayOf(PropTypes.object),
   requestGameList: PropTypes.func.isRequired,
+  goToRecommendations: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   likeGame: PropTypes.func.isRequired, // eslint-disable-line
+  goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
 };
 
 export default GameList;
