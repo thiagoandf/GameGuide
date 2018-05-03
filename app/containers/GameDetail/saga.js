@@ -1,6 +1,7 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
+import { REQUEST_GAME_LIST } from 'domain/constants';
+import { requestGameList } from 'domain/sagas';
 
-// Individual exports for testing
 export default function* defaultSaga() {
-  // See example in containers/HomePage/saga.js
+  yield takeLatest(REQUEST_GAME_LIST, requestGameList);
 }

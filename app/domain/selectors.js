@@ -10,6 +10,12 @@ export const makeSelectGameList = () => createSelector(
   (games) => games.toJS()
 );
 
+export const makeSelectGame = (id) => createSelector(
+  makeSelectGameList(),
+  // TODO: ensure it is sorted and binary search
+  (games) => games.find((item) => item.id === +id)
+);
+
 export const makeSelectPlayer = () => createSelector(
   selectPlayer,
   (player) => player.toJS()

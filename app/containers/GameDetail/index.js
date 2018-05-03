@@ -1,48 +1,32 @@
-/**
- *
- * GameDetail
- *
- */
-
-import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { goBack } from 'react-router-redux';
 
-// import injectSaga from 'utils/injectSaga';
-// import injectReducer from 'utils/injectReducer';
-// import makeSelectGameDetail from './selectors';
-// import reducer from './reducer';
-// import saga from './saga';
-import messages from './messages';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import { makeSelectGame } from 'domain/selectors';
+import reducer from 'domain/reducer';
+import { requestGameList } from 'domain/actions';
+import saga from './saga';
 
-const GameDetail = () => (
-  <div>
-    <FormattedMessage {...messages.header} />
-  </div>
-);
+import GameDetail from './GameDetail';
 
-GameDetail.propTypes = {};
-
-const mapStateToProps = createStructuredSelector({
-  // gamedetail: makeSelectGameDetail(),
+const mapStateToProps = (state, ownProps) => ({
+  game: makeSelectGame(ownProps.match.params.id)(state),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  requestGameList: () => dispatch(requestGameList()),
+  goBack: () => dispatch(goBack()),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-// const withReducer = injectReducer({ key: 'gamedetail', reducer });
-// const withSaga = injectSaga({ key: 'gamedetail', saga });
+const withReducer = injectReducer({ key: 'domain', reducer });
+const withSaga = injectSaga({ key: 'domain', saga });
 
 export default compose(
-  // withReducer,
-  // withSaga,
+  withReducer,
+  withSaga,
   withConnect,
 )(GameDetail);
