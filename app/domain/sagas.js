@@ -1,8 +1,22 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
-import { postLikeGame, getGameList, getRecommendations, postLogin } from 'api/ackbar';
-import { updateLikedGames, loadGameList, loadRecommendations, loadToken } from './actions';
+import {
+  postLikeGame,
+  getGameList,
+  getRecommendations,
+  postLogin,
+  postSignup,
+} from 'api/ackbar';
+
+import {
+  updateLikedGames,
+  loadGameList,
+  loadRecommendations,
+  loadToken,
+} from './actions';
+
+import { selectPlayerEmail, selectPlayerPassword } from './selectors';
 
 export function* likeGame(action) {
   try {
@@ -36,6 +50,18 @@ export function* tryLogin(action) {
     const { token } = yield call(postLogin, action.email, action.password);
     yield put(loadToken(token));
     yield put(push('/recommendations'));
+  } catch (err) {
+    console.log(err); // eslint-disable-line
+  }
+}
+
+export function* trySignUp() {
+  try {
+    const email = yield select(selectPlayerEmail);
+    const password = yield select(selectPlayerPassword);
+    const { token } = yield call(postSignup, email, password);
+    yield put(loadToken(token));
+    yield put(push('/games'));
   } catch (err) {
     console.log(err); // eslint-disable-line
   }
