@@ -8,3 +8,4 @@ export const TRY_LOGIN = 'domain.login.try';
 export const LOAD_TOKEN = 'domain.token.load';
 export const UPDATE_LOGIN_EMAIL = 'domain.login.email.update';
 export const UPDATE_LOGIN_PASSWORD = 'domain.login.password.update';
+export const TRY_SIGNUP = 'domain.signup.try';

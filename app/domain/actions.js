@@ -9,6 +9,7 @@ import {
   LOAD_TOKEN,
   UPDATE_LOGIN_EMAIL,
   UPDATE_LOGIN_PASSWORD,
+  TRY_SIGNUP,
 } from './constants';
 
 export const requestGameList = () => ({
@@ -48,6 +49,10 @@ export const tryLogin = (email, password) => ({
 export const loadToken = (token) => ({
   type: LOAD_TOKEN,
   token,
+});
+
+export const trySignUp = () => ({
+  type: TRY_SIGNUP,
 });
 
 export const updateLoginEmail = (email) => ({

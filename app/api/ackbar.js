@@ -30,3 +30,6 @@ export const getRecommendations = () =>
 
 export const postLogin = () =>
   Promise.resolve({ token: 'jrrtolkien' });
+
+export const postSignup = () =>
+  Promise.resolve({ token: 'jrrtolkien' });

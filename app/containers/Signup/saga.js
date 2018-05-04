@@ -1,6 +1,8 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 
-// Individual exports for testing
+import { trySignUp } from 'domain/sagas';
+import { TRY_SIGNUP } from 'domain/constants';
+
 export default function* defaultSaga() {
-  // See example in containers/HomePage/saga.js
+  yield takeLatest(TRY_SIGNUP, trySignUp);
 }

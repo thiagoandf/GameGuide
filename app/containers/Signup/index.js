@@ -1,50 +1,33 @@
-/**
- *
- * Signup
- *
- */
-
-import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import reducer from 'domain/reducer';
+import { selectPlayerEmail, selectPlayerPassword } from 'domain/selectors';
+import { updateLoginEmail, updateLoginPassword, trySignUp } from 'domain/actions';
 
-import makeSelectSignup from './selectors';
+import Signup from './Signup';
 import saga from './saga';
-import messages from './messages';
-
-function Signup() {
-  return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
-  );
-}
-
-Signup.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = createStructuredSelector({
-  signup: makeSelectSignup(),
+  email: selectPlayerEmail,
+  password: selectPlayerPassword,
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  onChangeEmail: (email) => dispatch(updateLoginEmail(email)),
+  onChangePassword: (password) => dispatch(updateLoginPassword(password)),
+  trySignUp: () => dispatch(trySignUp()),
+  goBack: () => dispatch(push('/')),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'signup', reducer });
-const withSaga = injectSaga({ key: 'signup', saga });
+const withReducer = injectReducer({ key: 'domain', reducer });
+const withSaga = injectSaga({ key: 'domain', saga });
 
 export default compose(
   withReducer,
