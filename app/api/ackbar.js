@@ -1,30 +1,6 @@
 import request from 'utils/request';
 
-// export const getGameList = () =>
-//   Promise.resolve([
-//     {
-//       id: 1,
-//       name: 'Tokaido',
-//     },
-//     {
-//       id: 2,
-//       name: '7 Wonders',
-//     },
-//     {
-//       id: 3,
-//       name: 'Takenoko',
-//     },
-//     {
-//       id: 4,
-//       name: '7 Wonders Duel',
-//     },
-//     {
-//       id: 5,
-//       name: 'Hanabi',
-//     },
-//   ]);
-
-const ackbarUrl = process.env.ackbarUrl;
+const ackbarUrl = process.env.ACKBAR_URL;
 
 export const getGameList = () =>
   request(`${ackbarUrl}/api/Games`, {

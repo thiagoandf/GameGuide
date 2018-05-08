@@ -44,7 +44,7 @@ module.exports = require('./webpack.base.babel')({
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        ACKBAR_URL: 'ackbar.azurewebsites.net',
+        ACKBAR_URL: JSON.stringify('http://ackbar.azurewebsites.net'),
       },
     }),
 

@@ -22,7 +22,7 @@ const plugins = [
   }),
   new webpack.DefinePlugin({
     'process.env': {
-      ACKBAR_URL: 'ackbar.dev.gameguide.com.br',
+      ACKBAR_URL: JSON.stringify('http://ackbar.dev.gameguide.com.br'),
     },
   }),
 
