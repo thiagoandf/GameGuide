@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, FlatButton } from 'material-ui';
-
 import messages from './messages';
 
 const GameDetail = (props) => (

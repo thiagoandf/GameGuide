@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Paper, RaisedButton, TextField } from 'material-ui';
 import Logo from 'images/logo.png';
 
+
 const styles = {
   elementStyle: {
     margin: '40',
@@ -37,6 +38,8 @@ const styles = {
     paddingRight: 15,
     paddingBottom: 5,
     paddingTop: 5,
+    textColor: 'blue',
+    color: 'blue',
   },
   sign_up_button: {
     margin: 6,
@@ -64,14 +67,16 @@ const HomePage = (props) => {
           hintText="Email"
           value={props.email}
           onChange={handleOnChangeEmail}
-        /><br />
+        />
+        <br />
         <TextField
           type="password"
           style={styles.elementStyle}
           hintText="Password"
           value={props.password}
           onChange={handleOnChangePassword}
-        /><br />
+        />
+        <br />
         <div style={styles.container}>
           <RaisedButton label="Login" style={styles.login_button} onClick={props.tryLogin} />
           <RaisedButton label="Signup" style={styles.sign_up_button} onClick={props.goToSignup} />
