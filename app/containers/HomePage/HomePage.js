@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Paper, RaisedButton, TextField } from 'material-ui';
 import Logo from 'images/logo.png';
 
-
 const styles = {
   elementStyle: {
     margin: '40',
