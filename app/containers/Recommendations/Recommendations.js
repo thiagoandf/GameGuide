@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatButton } from 'material-ui';
+import { AppBar, FlatButton } from 'material-ui';
 import { List, ListItem } from 'material-ui/List';
+
+const buttonStyle = {
+  backgroundColor: 'transparent',
+  color: 'white',
+};
 
 const Recommendations = (props) => (
   <div>
-    <FlatButton label="Request recommendations" onClick={props.requestRecommendations} />
-    <FlatButton label="Request game list" onClick={props.requestGameList} />
-    <FlatButton label="Go to game list" onClick={props.goToGameList} />
-    <FlatButton label="Logout" onClick={props.logout} />
+    <AppBar title="GameGuide" onLeftIconButtonClick={this.handleToggle} >
+      <FlatButton label="Request recommendations" onClick={props.requestRecommendations} style={buttonStyle} />
+      <FlatButton label="Request game list" onClick={props.requestGameList} style={buttonStyle} />
+      <FlatButton label="Game List" onClick={props.goToGameList} style={buttonStyle} />
+      <FlatButton label="Logout" onClick={props.logout} style={buttonStyle} />
+    </AppBar>
     <List>
       {props.recommendedGames.map((game) =>
         (<ListItem

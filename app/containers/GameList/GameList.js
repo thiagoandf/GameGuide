@@ -3,14 +3,29 @@ import PropTypes from 'prop-types';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
-import { FlatButton } from 'material-ui';
+import { AppBar, FlatButton } from 'material-ui';
 import TokaidoImage from 'images/tokaido.jpg';
+
+const buttonStyle = {
+  backgroundColor: 'transparent',
+  color: 'white',
+};
+
+const gameStyle = {
+  margin: '20px',
+  maxWidth: '300px',
+  textAlign: 'center',
+  align: 'center',
+};
+
 
 const GameList = (props) => (
   <div>
-    <FlatButton label="Request game list" onClick={props.requestGameList} />
-    <FlatButton label="Go to recommendations" onClick={props.goToRecommendations} />
-    <FlatButton label="Logout" onClick={props.logout} />
+    <AppBar title="GameGuide" onLeftIconButtonClick={this.handleToggle} >
+      <FlatButton label="Recommendations" onClick={props.goToRecommendations} style={buttonStyle} />
+      <FlatButton label="Request Game List" onClick={props.requestGameList} style={buttonStyle} />
+      <FlatButton label="Logout" onClick={props.logout} style={buttonStyle} />
+    </AppBar>
     <GridList
       cellHeight={180}
     >
@@ -18,8 +33,9 @@ const GameList = (props) => (
         <GridTile
           key={game.id}
           title={game.name}
-          onClick={() => props.goToGameDetail(game.id)}
           actionIcon={<IconButton><ThumbUp color="white" onClick={() => props.likeGame(game.id)} /></IconButton>}
+          style={gameStyle}
+          onClick={() => props.goToGameDetail(game.id)}
         >
           <img src={TokaidoImage} alt="cool game" />
         </GridTile>
