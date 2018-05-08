@@ -28,6 +28,7 @@ const GameList = (props) => (
     </AppBar>
     <GridList
       cellHeight={180}
+      style={{ alignItems: 'center' }}
     >
       {props.gameList.map((game) => (
         <GridTile
