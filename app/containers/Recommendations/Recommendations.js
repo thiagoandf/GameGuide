@@ -37,28 +37,34 @@ const styles = {
   },
 };
 
-const Recommendations = (props) => (
-  <MuiThemeProvider muiTheme={muiTheme}>
-    <div style={styles.container}>
-      <div style={{ maxWidth: '100%', width: '1500' }}>
-        <AppBar title="GameGuide" onLeftIconButtonClick={this.handleToggle} showMenuIconButton={false}>
-          <FlatButton label="Request recommendations" onClick={props.requestRecommendations} style={styles.notShownButton} />
-          <FlatButton label="Request game list" onClick={props.requestGameList} style={styles.notShownButton} />
-          <FlatButton label="Game List" onClick={props.goToGameList} style={styles.buttonStyle} />
-          <FlatButton icon={<PowerSettingsNew />} onClick={props.logout} style={styles.buttonStyle} />
-        </AppBar>
-      </div>
-      <List>
-        {props.recommendedGames.map((game) =>
-          (<ListItem
-            key={game.id}
-            primaryText={game.name}
-            onClick={() => props.goToGameDetail(game.id)}
-          />))}
-      </List>
-    </div>
-  </MuiThemeProvider>
-);
+class Recommendations extends React.Component {
+  componentDidMount() {
+    this.props.requestGameList();
+    this.props.requestRecommendations();
+  }
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div style={styles.container}>
+          <div style={{ maxWidth: '100%', minWidth: '100%' }}>
+            <AppBar title="GameGuide" showMenuIconButton={false}>
+              <FlatButton label="Game List" onClick={this.props.goToGameList} style={styles.buttonStyle} />
+              <FlatButton icon={<PowerSettingsNew />} onClick={this.props.logout} style={styles.buttonStyle} />
+            </AppBar>
+          </div>
+          <List>
+            {this.props.recommendedGames.map((game) =>
+              (<ListItem
+                key={game.id}
+                primaryText={game.name}
+                onClick={() => this.props.goToGameDetail(game.id)}
+              />))}
+          </List>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
 
 Recommendations.propTypes = {
   recommendedGames: PropTypes.array,
