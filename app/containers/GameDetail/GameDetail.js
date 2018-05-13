@@ -1,19 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, FlatButton } from 'material-ui';
 import messages from './messages';
 
-const GameDetail = (props) => (
-  <div>
-    <AppBar title="GameGuide" onLeftIconButtonClick={this.handleToggle} >
-      <FlatButton label="Request game list" onClick={props.requestGameList} />
-      <FlatButton label="Go Back" onClick={props.goBack} />
-    </AppBar>
-    <FormattedMessage {...messages.header} />
-    {props.game && <p>Game: {props.game.name} - id: {props.game.id}</p>}
-  </div>
-);
+
+const muiTheme = getMuiTheme({
+  appBar: {
+    color: '#263238',
+    textColor: 'rgba(255, 255, 255, 0.87)',
+    maxWidth: 500,
+  },
+  flatButton: {
+    fontWeight: 600,
+  },
+});
+
+const styles = {
+  buttonStyle: {
+    backgroundColor: 'transparent',
+    color: 'white',
+    fontWeight: 50,
+    paddingTop: 12,
+    height: 40,
+  },
+  notShownButton: {
+    display: 'none',
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+};
+
+class GameDetail extends React.Component {
+  componentDidMount() {
+    this.props.requestGameList();
+  }
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div style={styles.container}>
+          <div style={{ maxWidth: '100%', minWidth: '100%' }}>
+            <AppBar title="GameGuide" showMenuIconButton={false}>
+              <FlatButton label="Go Back" style={styles.buttonStyle} onClick={this.props.goBack} />
+            </AppBar>
+            <FormattedMessage {...messages.header} />
+            {this.props.game && <p>Game: {this.props.game.name} - id: {this.props.game.id}</p>}
+          </div>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
 
 GameDetail.propTypes = {
   game: PropTypes.shape({
