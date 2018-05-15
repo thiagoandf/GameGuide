@@ -23,7 +23,7 @@ const styles = {
     marginTop: 0,
   },
   section: {
-    padding: 90,
+    padding: 40,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
