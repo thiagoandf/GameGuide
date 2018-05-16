@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { FormattedMessage } from 'react-intl';
+import TokaidoImage from 'images/tokaido.jpg';
 import { AppBar, FlatButton } from 'material-ui';
-import messages from './messages';
 
 
 const muiTheme = getMuiTheme({
@@ -36,6 +35,18 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
   },
+  imageDiv: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    paddingTop: 100,
+  },
+  gameImage: {
+    maxWidth: 400,
+    height: 'auto',
+  },
 };
 
 class GameDetail extends React.Component {
@@ -50,8 +61,14 @@ class GameDetail extends React.Component {
             <AppBar title="GameGuide" showMenuIconButton={false}>
               <FlatButton label="Go Back" style={styles.buttonStyle} onClick={this.props.goBack} />
             </AppBar>
-            <FormattedMessage {...messages.header} />
-            {this.props.game && <p>Game: {this.props.game.name} - id: {this.props.game.id}</p>}
+            <div style={styles.imageDiv}>
+              <div>
+                <img src={TokaidoImage} alt="cool game" style={styles.gameImage} />
+              </div>
+              <div>
+                <h1>{this.props.game.name}</h1>
+              </div>
+            </div>
           </div>
         </div>
       </MuiThemeProvider>
