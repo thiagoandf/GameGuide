@@ -23,6 +23,7 @@ export const makeSelectPlayer = () => createSelector(
 
 export const selectPlayerEmail = createSelector(selectPlayer, (player) => player.get('email'));
 export const selectPlayerPassword = createSelector(selectPlayer, (player) => player.get('password'));
+export const selectPlayerToken = createSelector(selectPlayer, (player) => player.get('token'));
 
 export const makeSelectRecommendations = () => createSelector(
   selectGames,
