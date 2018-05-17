@@ -43,7 +43,8 @@ export function* requestGameList() {
 
 export function* requestRecommendations() {
   try {
-    const recommendations = yield call(getRecommendations);
+    const token = yield select(selectPlayerToken);
+    const recommendations = yield call(getRecommendations, token);
     yield put(loadRecommendations(recommendations));
   } catch (err) {
     console.log(err); // eslint-disable-line

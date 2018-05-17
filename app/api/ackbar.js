@@ -25,9 +25,8 @@ export const getGameList = () =>
 export const postLikeGame = (gameId, token) =>
   requestAckbar(`api/Player/LikeGame/${gameId}`, 'POST', { token });
 
-export const getRecommendations = () =>
-  Promise.resolve([4, 5]);
-
+export const getRecommendations = (token) =>
+  requestAckbar('api/Player/Recommendations', 'GET', { token });
 
 export const postLogin = (email, password) =>
   requestAckbar('api/User/Login', 'POST', { email, password });
