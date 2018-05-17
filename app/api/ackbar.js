@@ -6,6 +6,7 @@ const requestAckbar = (path, method, payload) => {
     method,
     headers: new Headers({
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${(payload && payload.token) || ''}`,
     }),
   };
 
@@ -21,8 +22,8 @@ const requestAckbar = (path, method, payload) => {
 export const getGameList = () =>
   requestAckbar('api/Games', 'GET');
 
-export const postLikeGame = () =>
-  Promise.resolve();
+export const postLikeGame = (gameId, token) =>
+  requestAckbar(`api/Player/LikeGame/${gameId}`, 'POST', { token });
 
 export const getRecommendations = () =>
   Promise.resolve([4, 5]);

@@ -16,11 +16,16 @@ import {
   loadToken,
 } from './actions';
 
-import { selectPlayerEmail, selectPlayerPassword } from './selectors';
+import {
+  selectPlayerEmail,
+  selectPlayerPassword,
+  selectPlayerToken,
+} from './selectors';
 
 export function* likeGame(action) {
   try {
-    yield call(postLikeGame, action.gameId);
+    const token = yield select(selectPlayerToken);
+    yield call(postLikeGame, action.gameId, token);
     yield put(updateLikedGames(action.gameId));
   } catch (err) {
     console.log(err); // eslint-disable-line
