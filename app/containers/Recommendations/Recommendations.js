@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, FlatButton } from 'material-ui';
 import { List, ListItem } from 'material-ui/List';
+import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
@@ -57,14 +58,16 @@ class Recommendations extends React.Component {
               <FlatButton icon={<PowerSettingsNew />} onClick={this.props.logout} style={styles.buttonStyle} />
             </AppBar>
           </div>
-          <List>
-            {this.props.recommendedGames.map((game) =>
-              (<ListItem
-                key={game.id}
-                primaryText={game.name}
-                onClick={() => this.props.goToGameDetail(game.id)}
-              />))}
-          </List>
+          <Paper>
+            <List>
+              {this.props.recommendedGames.map((game) =>
+                (<ListItem
+                  key={game.id}
+                  primaryText={game.name}
+                  onClick={() => this.props.goToGameDetail(game.id)}
+                />))}
+            </List>
+          </Paper>
         </div>
       </MuiThemeProvider>
     );
