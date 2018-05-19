@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TokaidoImage from 'images/tokaido.jpg';
-import { AppBar, FlatButton } from 'material-ui';
+import { AppBar, FlatButton, RaisedButton } from 'material-ui';
 
 
 const muiTheme = getMuiTheme({
@@ -67,6 +67,8 @@ class GameDetail extends React.Component {
               </div>
               <div>
                 <h1>{this.props.game.name}</h1>
+                <p>This is a description</p>
+                <RaisedButton label="Go Back" onClick={this.props.goBack} />
               </div>
             </div>
           </div>

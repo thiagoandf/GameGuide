@@ -13,7 +13,7 @@ const muiTheme = getMuiTheme({
   appBar: {
     color: '#263238',
     textColor: 'rgba(255, 255, 255, 0.87)',
-    maxWidth: 500,
+    width: '100px',
   },
   flatButton: {
     fontWeight: 600,
@@ -52,6 +52,12 @@ const styles = {
     fullWidth: true,
     height: 'auto',
   },
+  image: {
+    minWidth: '100%',
+    maxWidth: '100%',
+    height: 'auto',
+    marginTop: '-30%',
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -59,6 +65,11 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     height: '100%',
+  },
+  title: {
+    cursor: 'pointer',
+    userSelect: 'none',
+    webkitUserSelect: 'none',
   },
 };
 
@@ -72,7 +83,7 @@ class GameList extends React.Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.container}>
           <div style={{ maxWidth: '100%', minWidth: '100%' }}>
-            <AppBar title="GameGuide" showMenuIconButton={false}>
+            <AppBar title={<span style={styles.title}>GameGuide</span>} showMenuIconButton={false} onTitleClick={this.props.goToRecommendations}>
               <FlatButton label="Recommendations" onClick={this.props.goToRecommendations} style={styles.buttonStyle} />
               <FlatButton icon={<PowerSettingsNew />} onClick={this.props.logout} style={styles.buttonStyle} />
             </AppBar>
@@ -85,12 +96,13 @@ class GameList extends React.Component {
                 {this.props.gameList.map((game) => (
                   <GridTile
                     key={game.id}
-                    title={game.name}
+                    title={<span role="button" style={styles.title} tabIndex="0" onClick={() => this.props.goToGameDetail(game.id)}><strong>{game.name}</strong> </span>}
                     actionIcon={<IconButton><ThumbUp color="white" onClick={() => this.props.likeGame(game.id)} /></IconButton>}
                     style={styles.gameStyle}
-                    onClick={() => this.props.goToGameDetail(game.id)}
                   >
-                    <img src={TokaidoImage} alt="cool game" />
+                    <span role="button" style={styles.title} tabIndex="0" onClick={() => this.props.goToGameDetail(game.id)}>
+                      <img src={TokaidoImage} alt="cool game" style={styles.image} />
+                    </span>
                   </GridTile>
                 ))}
               </GridList>

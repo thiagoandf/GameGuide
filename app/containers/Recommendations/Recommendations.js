@@ -35,6 +35,11 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
   },
+  title: {
+    cursor: 'pointer',
+    userSelect: 'none',
+    webkitUserSelect: 'none',
+  },
 };
 
 class Recommendations extends React.Component {
@@ -47,7 +52,7 @@ class Recommendations extends React.Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.container}>
           <div style={{ maxWidth: '100%', minWidth: '100%' }}>
-            <AppBar title="GameGuide" showMenuIconButton={false}>
+            <AppBar title={<span style={styles.title}>GameGuide</span>} showMenuIconButton={false} onTitleClick={this.props.goToRecommendations}>
               <FlatButton label="Game List" onClick={this.props.goToGameList} style={styles.buttonStyle} />
               <FlatButton icon={<PowerSettingsNew />} onClick={this.props.logout} style={styles.buttonStyle} />
             </AppBar>
@@ -70,6 +75,7 @@ Recommendations.propTypes = {
   recommendedGames: PropTypes.array,
   requestGameList: PropTypes.func.isRequired,
   requestRecommendations: PropTypes.func.isRequired,
+  goToRecommendations: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
