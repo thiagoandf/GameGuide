@@ -6,7 +6,6 @@ import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import { AppBar, FlatButton } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import TokaidoImage from 'images/tokaido.jpg';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
 
 const muiTheme = getMuiTheme({
@@ -101,7 +100,7 @@ class GameList extends React.Component {
                     style={styles.gameStyle}
                   >
                     <span role="button" style={styles.title} tabIndex="0" onClick={() => this.props.goToGameDetail(game.id)}>
-                      <img src={TokaidoImage} alt="cool game" style={styles.image} />
+                      <img src={game.coverImage} alt="cool game" style={styles.image} />
                     </span>
                   </GridTile>
                 ))}
@@ -115,7 +114,16 @@ class GameList extends React.Component {
 }
 
 GameList.propTypes = {
-  gameList: PropTypes.arrayOf(PropTypes.object),
+  gameList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    year: PropTypes.string,
+    age: PropTypes.string,
+    numberOfPlayers: PropTypes.string,
+    duration: PropTypes.string,
+    description: PropTypes.string,
+    coverImage: PropTypes.string,
+  })),
   requestGameList: PropTypes.func.isRequired,
   goToRecommendations: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,

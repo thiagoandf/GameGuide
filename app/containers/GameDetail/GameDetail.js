@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import TokaidoImage from 'images/tokaido.jpg';
 import { AppBar, FlatButton, RaisedButton } from 'material-ui';
 
 
@@ -63,11 +62,14 @@ class GameDetail extends React.Component {
             </AppBar>
             <div style={styles.imageDiv}>
               <div>
-                <img src={TokaidoImage} alt="cool game" style={styles.gameImage} />
+                <img src={this.props.game.coverImage} alt="cool game" style={styles.gameImage} />
               </div>
               <div>
                 <h1>{this.props.game.name}</h1>
-                <p>This is a description</p>
+                <p>{this.props.game.year}</p>
+                <p>{this.props.game.numberOfPlayers} players - {this.props.game.duration}</p>
+                <p>Recommended age: {this.props.game.age}</p>
+                <p>{this.props.game.description}</p>
                 <RaisedButton label="Go Back" onClick={this.props.goBack} />
               </div>
             </div>
@@ -82,6 +84,12 @@ GameDetail.propTypes = {
   game: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    year: PropTypes.string,
+    age: PropTypes.string,
+    numberOfPlayers: PropTypes.string,
+    duration: PropTypes.string,
+    description: PropTypes.string,
+    coverImage: PropTypes.string,
   }),
   requestGameList: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
