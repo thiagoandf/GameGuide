@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Paper, RaisedButton, TextField } from 'material-ui';
-import Logo from 'images/logo.png';
+import VerticalContainer from '../../components/VerticalContainer';
+import LogoHeader from '../../components/LogoHeader';
 
 const styles = {
   elementStyle: {
@@ -22,14 +23,6 @@ const styles = {
     margin: 5,
     marginTop: 0,
   },
-  section: {
-    padding: 40,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-  },
   login_button: {
     margin: 6,
     alignItems: 'center',
@@ -46,7 +39,6 @@ const styles = {
   },
 };
 
-
 const Signup = (props) => {
   const handleOnChangeEmail = (event) => {
     props.onChangeEmail(event.target.value);
@@ -57,31 +49,36 @@ const Signup = (props) => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.section}>
-        <img src={Logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
-      </div>
+    <VerticalContainer>
+      <LogoHeader />
       <Paper style={styles.paper}>
-        <TextField
-          style={styles.elementStyle}
-          hintText="Email"
-          value={props.email}
-          onChange={handleOnChangeEmail}
-        />
-        <br />
-        <TextField
-          style={styles.elementStyle}
-          type="password"
-          hintText="Password"
-          value={props.password}
-          onChange={handleOnChangePassword}
-        />
-        <div style={styles.container}>
-          <RaisedButton label="Register" style={styles.login_button} onClick={props.trySignUp} />
-          <RaisedButton label="Back to login" style={styles.sign_up_button} onClick={props.goBack} />
-        </div>
+        <VerticalContainer>
+          <TextField
+            style={styles.elementStyle}
+            hintText="Email"
+            value={props.email}
+            onChange={handleOnChangeEmail}
+          />
+          <TextField
+            style={styles.elementStyle}
+            type="password"
+            hintText="Password"
+            value={props.password}
+            onChange={handleOnChangePassword}
+          />
+          <RaisedButton
+            label="Cadastrar"
+            style={styles.login_button}
+            onClick={props.trySignUp}
+          />
+          <RaisedButton
+            label="Voltar para login"
+            style={styles.sign_up_button}
+            onClick={props.goBack}
+          />
+        </VerticalContainer>
       </Paper>
-    </div>
+    </VerticalContainer>
   );
 };
 

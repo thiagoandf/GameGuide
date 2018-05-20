@@ -1,20 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { AppBar, FlatButton, RaisedButton } from 'material-ui';
-
-
-const muiTheme = getMuiTheme({
-  appBar: {
-    color: '#263238',
-    textColor: 'rgba(255, 255, 255, 0.87)',
-    maxWidth: 500,
-  },
-  flatButton: {
-    fontWeight: 600,
-  },
-});
+import { RaisedButton } from 'material-ui';
+import VerticalContainer from '../../components/VerticalContainer';
+import MainAppBar from '../../components/MainAppBar';
 
 const styles = {
   buttonStyle: {
@@ -54,28 +42,37 @@ class GameDetail extends React.Component {
   }
   render() {
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.container}>
-          <div style={{ maxWidth: '100%', minWidth: '100%' }}>
-            <AppBar title="GameGuide" showMenuIconButton={false}>
-              <FlatButton label="Go Back" style={styles.buttonStyle} onClick={this.props.goBack} />
-            </AppBar>
+      <VerticalContainer>
+        <div style={{ maxWidth: '100%', minWidth: '100%' }}>
+          <MainAppBar
+            goToRecommendations={this.props.goToRecommendations}
+            goToGameList={this.props.goToGameList}
+            logout={this.props.logout}
+          />
+          <VerticalContainer>
             <div style={styles.imageDiv}>
               <div>
-                <img src={this.props.game.coverImage} alt="cool game" style={styles.gameImage} />
-              </div>
-              <div>
-                <h1>{this.props.game.name}</h1>
-                <p>{this.props.game.year}</p>
-                <p>{this.props.game.numberOfPlayers} players - {this.props.game.duration}</p>
-                <p>Recommended age: {this.props.game.age}</p>
-                <p>{this.props.game.description}</p>
-                <RaisedButton label="Go Back" onClick={this.props.goBack} />
+                <img
+                  src={this.props.game.coverImage}
+                  alt="cool game"
+                  style={styles.gameImage}
+                />
               </div>
             </div>
-          </div>
+            <div>
+              <h1>{this.props.game.name}</h1>
+              <p>{this.props.game.year}</p>
+              <p>
+                {this.props.game.numberOfPlayers} players -{' '}
+                {this.props.game.duration}
+              </p>
+              <p>Recommended age: {this.props.game.age}</p>
+              <p>{this.props.game.description}</p>
+              <RaisedButton label="Go Back" onClick={this.props.goBack} />
+            </div>
+          </VerticalContainer>
         </div>
-      </MuiThemeProvider>
+      </VerticalContainer>
     );
   }
 }
@@ -93,6 +90,9 @@ GameDetail.propTypes = {
   }),
   requestGameList: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
+  goToGameList: PropTypes.func.isRequired,
+  goToRecommendations: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default GameDetail;

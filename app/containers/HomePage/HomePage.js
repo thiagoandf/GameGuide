@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Paper, RaisedButton, TextField } from 'material-ui';
-import Logo from 'images/logo.png';
+import VerticalContainer from '../../components/VerticalContainer';
+import LogoHeader from '../../components/LogoHeader';
 
 const styles = {
   elementStyle: {
@@ -21,14 +22,6 @@ const styles = {
     justifyContent: 'center',
     margin: 5,
     marginTop: 0,
-  },
-  section: {
-    padding: 40,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
   },
   login_button: {
     margin: 6,
@@ -56,32 +49,36 @@ const HomePage = (props) => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.section}>
-        <img src={Logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
-      </div>
+    <VerticalContainer>
+      <LogoHeader />
       <Paper style={styles.paper}>
-        <TextField
-          style={styles.elementStyle}
-          hintText="Email"
-          value={props.email}
-          onChange={handleOnChangeEmail}
-        />
-        <br />
-        <TextField
-          type="password"
-          style={styles.elementStyle}
-          hintText="Password"
-          value={props.password}
-          onChange={handleOnChangePassword}
-        />
-        <br />
-        <div style={styles.container}>
-          <RaisedButton label="Login" style={styles.login_button} onClick={props.tryLogin} />
-          <RaisedButton label="Signup" style={styles.sign_up_button} onClick={props.goToSignup} />
-        </div>
+        <VerticalContainer>
+          <TextField
+            style={styles.elementStyle}
+            hintText="Email"
+            value={props.email}
+            onChange={handleOnChangeEmail}
+          />
+          <TextField
+            type="password"
+            style={styles.elementStyle}
+            hintText="Password"
+            value={props.password}
+            onChange={handleOnChangePassword}
+          />
+          <RaisedButton
+            label="Login"
+            style={styles.login_button}
+            onClick={props.tryLogin}
+          />
+          <RaisedButton
+            label="Ir para cadastro"
+            style={styles.sign_up_button}
+            onClick={props.goToSignup}
+          />
+        </VerticalContainer>
       </Paper>
-    </div>
+    </VerticalContainer>
   );
 };
 
