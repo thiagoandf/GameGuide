@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { goBack } from 'react-router-redux';
+import { push, goBack } from 'react-router-redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -16,6 +16,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  goToRecommendations: () => dispatch(push('/recommendations')),
+  goToGameList: () => dispatch(push('/games')),
+  logout: () => dispatch(push('/')),
   requestGameList: () => dispatch(requestGameList()),
   goBack: () => dispatch(goBack()),
 });
@@ -25,8 +28,4 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'domain', reducer });
 const withSaga = injectSaga({ key: 'domain', saga });
 
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(GameDetail);
+export default compose(withReducer, withSaga, withConnect)(GameDetail);
