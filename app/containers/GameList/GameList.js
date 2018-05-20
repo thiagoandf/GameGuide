@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
+import { Subheader } from 'material-ui';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
 
@@ -16,14 +17,6 @@ const styles = {
   },
   notShownButton: {
     display: 'none',
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
   },
   gameStyle: {
     padding: '5%',
@@ -68,6 +61,7 @@ class GameList extends React.Component {
           />
           <div style={styles.root}>
             <GridList cellHeight={200} style={styles.gridList}>
+              <Subheader>Mostre-nos quais jogos você curte!</Subheader>
               {this.props.gameList.map((game) => (
                 <GridTile
                   key={game.id}

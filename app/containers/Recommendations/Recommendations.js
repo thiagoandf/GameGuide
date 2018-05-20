@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+import { Subheader, Avatar } from 'material-ui';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
 
@@ -21,10 +22,15 @@ class Recommendations extends React.Component {
           />
           <Paper>
             <List>
+              <Subheader>
+                Nosso sistema recomenda para você estes jogos:
+              </Subheader>
               {this.props.recommendedGames.map((game) => (
                 <ListItem
                   key={game.id}
                   primaryText={game.name}
+                  secondaryText={game.year}
+                  leftAvatar={<Avatar src={game.coverImage} />}
                   onClick={() => this.props.goToGameDetail(game.id)}
                 />
               ))}
