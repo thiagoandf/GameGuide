@@ -1,27 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, RaisedButton, TextField } from 'material-ui';
+import { Paper, RaisedButton, TextField, Subheader } from 'material-ui';
 import VerticalContainer from '../../components/VerticalContainer';
 import LogoHeader from '../../components/LogoHeader';
 
 const styles = {
   elementStyle: {
-    margin: '40',
+    marginBottom: '7',
     color: 'white',
   },
   paper: {
     height: '100%',
+    width: '90%',
     display: 'block',
-    margin: 0,
-    padding: 15,
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 5,
-    marginTop: 0,
+    margin: 2,
+    padding: 10,
   },
   login_button: {
     margin: 6,
@@ -53,6 +46,7 @@ const Signup = (props) => {
       <LogoHeader />
       <Paper style={styles.paper}>
         <VerticalContainer>
+          <Subheader>Faça seu cadastro:</Subheader>
           <TextField
             style={styles.elementStyle}
             hintText="Email"

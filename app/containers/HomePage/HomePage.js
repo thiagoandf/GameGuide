@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, RaisedButton, TextField } from 'material-ui';
+import { Paper, RaisedButton, TextField, Subheader } from 'material-ui';
 import VerticalContainer from '../../components/VerticalContainer';
 import LogoHeader from '../../components/LogoHeader';
 
 const styles = {
   elementStyle: {
-    margin: '40',
+    marginBottom: '7',
     color: 'white',
   },
   paper: {
     height: '100%',
+    width: '90%',
     display: 'block',
-    margin: 0,
-    padding: 15,
+    margin: 2,
+    padding: 10,
   },
   container: {
     display: 'flex',
@@ -53,9 +54,10 @@ const HomePage = (props) => {
       <LogoHeader />
       <Paper style={styles.paper}>
         <VerticalContainer>
+          <Subheader>Bem-vindo! Entre com seu e-mail e senha:</Subheader>
           <TextField
             style={styles.elementStyle}
-            hintText="Email"
+            hintText="E-mail"
             value={props.email}
             onChange={handleOnChangeEmail}
           />

@@ -13,8 +13,8 @@ const StyledVerticalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 5px;
-  margin-top: 0px;
+  margin: 0px;
+  margin-bottom: 5px;
   max-width: 100%;
   min-width: 100%;
 `;
