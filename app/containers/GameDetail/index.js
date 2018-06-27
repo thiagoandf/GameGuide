@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
   game: makeSelectGame(ownProps.match.params.id)(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   goToRecommendations: () => dispatch(push('/recommendations')),
   goToGameList: () => dispatch(push('/games')),
   logout: () => dispatch(push('/')),
@@ -23,9 +23,16 @@ const mapDispatchToProps = (dispatch) => ({
   goBack: () => dispatch(goBack()),
 });
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 const withReducer = injectReducer({ key: 'domain', reducer });
 const withSaga = injectSaga({ key: 'domain', saga });
 
-export default compose(withReducer, withSaga, withConnect)(GameDetail);
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(GameDetail);

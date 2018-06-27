@@ -19,13 +19,12 @@ const requestAckbar = (path, method, payload) => {
   });
 };
 
-export const getGameList = () =>
-  requestAckbar('api/Games', 'GET');
+export const getGameList = () => requestAckbar('api/Games', 'GET');
 
 export const postLikeGame = (gameId, token) =>
   requestAckbar(`api/Player/LikeGame/${gameId}`, 'POST', { token });
 
-export const getRecommendations = (token) =>
+export const getRecommendations = token =>
   requestAckbar('api/Player/Recommendations', 'GET', { token });
 
 export const postLogin = (email, password) =>

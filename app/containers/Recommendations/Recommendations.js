@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
-import { Subheader, Avatar } from 'material-ui';
+import {
+  List,
+  ListItem,
+  Paper,
+  ListSubheader,
+  Avatar,
+} from '@material-ui/core';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
 
@@ -22,10 +26,10 @@ class Recommendations extends React.Component {
           />
           <Paper>
             <List>
-              <Subheader>
+              <ListSubheader>
                 Nosso sistema recomenda para você estes jogos:
-              </Subheader>
-              {this.props.recommendedGames.map((game) => (
+              </ListSubheader>
+              {this.props.recommendedGames.map(game => (
                 <ListItem
                   key={game.id}
                   primaryText={game.name}

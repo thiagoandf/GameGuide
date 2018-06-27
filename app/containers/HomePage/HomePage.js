@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, RaisedButton, TextField, Subheader } from 'material-ui';
+import { Paper, Button, TextField, ListSubheader } from '@material-ui/core';
 import VerticalContainer from '../../components/VerticalContainer';
 import LogoHeader from '../../components/LogoHeader';
 
@@ -40,12 +40,12 @@ const styles = {
   },
 };
 
-const HomePage = (props) => {
-  const handleOnChangeEmail = (event) => {
+const HomePage = props => {
+  const handleOnChangeEmail = event => {
     props.onChangeEmail(event.target.value);
   };
 
-  const handleOnChangePassword = (event) => {
+  const handleOnChangePassword = event => {
     props.onChangePassword(event.target.value);
   };
 
@@ -54,7 +54,9 @@ const HomePage = (props) => {
       <LogoHeader />
       <Paper style={styles.paper}>
         <VerticalContainer>
-          <Subheader>Bem-vindo! Entre com seu e-mail e senha:</Subheader>
+          <ListSubheader>
+            Bem-vindo! Entre com seu e-mail e senha:
+          </ListSubheader>
           <TextField
             style={styles.elementStyle}
             hintText="E-mail"
@@ -68,12 +70,14 @@ const HomePage = (props) => {
             value={props.password}
             onChange={handleOnChangePassword}
           />
-          <RaisedButton
+          <Button
+            variant="raised"
             label="Login"
             style={styles.login_button}
             onClick={props.tryLogin}
           />
-          <RaisedButton
+          <Button
+            variant="raised"
             label="Ir para cadastro"
             style={styles.sign_up_button}
             onClick={props.goToSignup}

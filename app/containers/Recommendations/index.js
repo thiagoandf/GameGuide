@@ -16,18 +16,25 @@ const mapStateToProps = createStructuredSelector({
   recommendedGames: makeSelectRecommendations(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   requestGameList: () => dispatch(requestGameList()),
   requestRecommendations: () => dispatch(requestRecommendations()),
   goToRecommendations: () => dispatch(push('/recommendations')),
   goToGameList: () => dispatch(push('/games')),
-  goToGameDetail: (gameId) => dispatch(push(`/game/${gameId}`)),
+  goToGameDetail: gameId => dispatch(push(`/game/${gameId}`)),
   logout: () => dispatch(push('/')),
 });
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 const withReducer = injectReducer({ key: 'domain', reducer });
 const withSaga = injectSaga({ key: 'domain', saga });
 
-export default compose(withReducer, withSaga, withConnect)(Recommendations);
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(Recommendations);

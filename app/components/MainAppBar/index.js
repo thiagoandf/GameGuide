@@ -5,7 +5,13 @@
  */
 
 import React from 'react';
-import { AppBar, Drawer, MenuItem, Subheader, Divider } from 'material-ui';
+import {
+  AppBar,
+  Drawer,
+  MenuItem,
+  ListSubheader,
+  Divider,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 class MainAppBar extends React.Component {
@@ -42,9 +48,9 @@ class MainAppBar extends React.Component {
           docked={false}
           width={200}
           open={this.state.open}
-          onRequestChange={(open) => this.setState({ open })}
+          onRequestChange={open => this.setState({ open })}
         >
-          <Subheader>Ir para:</Subheader>
+          <ListSubheader>Ir para:</ListSubheader>
           <MenuItem onClick={this.handleGoToRecommendations}>
             Recomendações
           </MenuItem>

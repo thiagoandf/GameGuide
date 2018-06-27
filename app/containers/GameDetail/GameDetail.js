@@ -7,7 +7,7 @@ import {
   CardText,
   CardActions,
   FlatButton,
-} from 'material-ui';
+} from '@material-ui/core';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
 

@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GridList, GridTile } from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
-import { Subheader } from 'material-ui';
+import {
+  GridList,
+  GridTile,
+  IconButton,
+  ListSubheader,
+} from '@material-ui/core';
+import { ThumbUp } from '@material-ui/icons';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
 
@@ -61,8 +64,8 @@ class GameList extends React.Component {
           />
           <div style={styles.root}>
             <GridList cellHeight={200} style={styles.gridList}>
-              <Subheader>Mostre-nos quais jogos você curte!</Subheader>
-              {this.props.gameList.map((game) => (
+              <ListSubheader>Mostre-nos quais jogos você curte!</ListSubheader>
+              {this.props.gameList.map(game => (
                 <GridTile
                   key={game.id}
                   title={
