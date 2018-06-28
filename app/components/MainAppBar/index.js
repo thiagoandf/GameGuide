@@ -1,17 +1,15 @@
-/**
- *
- * MainAppBar
- *
- */
-
 import React from 'react';
 import {
   AppBar,
+  Toolbar,
+  Typography,
   Drawer,
-  MenuItem,
   ListSubheader,
+  MenuItem,
   Divider,
+  IconButton,
 } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 
 class MainAppBar extends React.Component {
@@ -22,8 +20,6 @@ class MainAppBar extends React.Component {
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
-
-  handleClose = () => this.setState({ open: false });
 
   handleGoToRecommendations = () => {
     this.setState({ open: false });
@@ -42,14 +38,22 @@ class MainAppBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <AppBar title="GameGuide" onLeftIconButtonClick={this.handleToggle} />
-        <Drawer
-          docked={false}
-          width={200}
-          open={this.state.open}
-          onRequestChange={open => this.setState({ open })}
-        >
+      <React.Fragment>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              GameGuide
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer open={this.state.open} onClose={this.handleToggle}>
           <ListSubheader>Ir para:</ListSubheader>
           <MenuItem onClick={this.handleGoToRecommendations}>
             Recomendações
@@ -58,7 +62,7 @@ class MainAppBar extends React.Component {
           <Divider />
           <MenuItem onClick={this.handleLogout}>Sair</MenuItem>
         </Drawer>
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -59,29 +59,31 @@ const HomePage = props => {
           </ListSubheader>
           <TextField
             style={styles.elementStyle}
-            hintText="E-mail"
+            placeholder="E-mail"
             value={props.email}
             onChange={handleOnChangeEmail}
           />
           <TextField
             type="password"
             style={styles.elementStyle}
-            hintText="Password"
+            placeholder="Password"
             value={props.password}
             onChange={handleOnChangePassword}
           />
           <Button
             variant="raised"
-            label="Login"
             style={styles.login_button}
             onClick={props.tryLogin}
-          />
+          >
+            Login
+          </Button>
           <Button
             variant="raised"
-            label="Ir para cadastro"
             style={styles.sign_up_button}
             onClick={props.goToSignup}
-          />
+          >
+            Ir para cadastro
+          </Button>
         </VerticalContainer>
       </Paper>
     </VerticalContainer>

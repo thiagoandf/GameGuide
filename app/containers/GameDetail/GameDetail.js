@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {
   Card,
   CardMedia,
-  CardTitle,
-  CardText,
   CardActions,
-  FlatButton,
+  CardContent,
+  CardHeader,
+  Button,
 } from '@material-ui/core';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
@@ -26,21 +26,25 @@ class GameDetail extends React.Component {
           />
           <VerticalContainer>
             <Card>
-              <CardMedia>
-                <img src={this.props.game.coverImage} alt="cool game" />
-              </CardMedia>
-              <CardTitle
+              <CardHeader
                 title={this.props.game.name}
                 subtitle={this.props.game.year}
               />
-              <CardText>
+              <CardMedia src={this.props.game.coverImage} title="cool game" />
+              <CardContent>
                 Para {this.props.game.numberOfPlayers} jogadores
-              </CardText>
-              <CardText>Duração: {this.props.game.duration} minutos</CardText>
-              <CardText>Idade recomendada: {this.props.game.age}</CardText>
-              <CardText>{this.props.game.description}</CardText>
+              </CardContent>
+              <CardContent>
+                Duração: {this.props.game.duration} minutos
+              </CardContent>
+              <CardContent>
+                Idade recomendada: {this.props.game.age}
+              </CardContent>
+              <CardContent>{this.props.game.description}</CardContent>
               <CardActions>
-                <FlatButton label="Voltar" onClick={this.props.goBack} />
+                <Button variant="flat" onClick={this.props.goBack}>
+                  Voltar
+                </Button>
               </CardActions>
             </Card>
           </VerticalContainer>

@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   GridList,
-  GridTile,
+  GridListTile,
   IconButton,
   ListSubheader,
+  GridListTileBar,
 } from '@material-ui/core';
 import { ThumbUp } from '@material-ui/icons';
 import VerticalContainer from '../../components/VerticalContainer';
@@ -66,41 +67,21 @@ class GameList extends React.Component {
             <GridList cellHeight={200} style={styles.gridList}>
               <ListSubheader>Mostre-nos quais jogos você curte!</ListSubheader>
               {this.props.gameList.map(game => (
-                <GridTile
-                  key={game.id}
-                  title={
-                    <span
-                      role="button"
-                      style={styles.title}
-                      tabIndex="0"
-                      onClick={() => this.props.goToGameDetail(game.id)}
-                    >
-                      <strong>{game.name}</strong>{' '}
-                    </span>
-                  }
-                  actionIcon={
-                    <IconButton>
-                      <ThumbUp
-                        color="white"
-                        onClick={() => this.props.likeGame(game.id)}
-                      />
-                    </IconButton>
-                  }
-                  style={styles.gameStyle}
-                >
-                  <span
-                    role="button"
-                    style={styles.title}
-                    tabIndex="0"
-                    onClick={() => this.props.goToGameDetail(game.id)}
-                  >
-                    <img
-                      src={game.coverImage}
-                      alt="cool game"
-                      style={styles.image}
-                    />
-                  </span>
-                </GridTile>
+                <GridListTile key={game.id}>
+                  <img
+                    src={game.coverImage}
+                    alt="cool game"
+                    style={styles.image}
+                  />
+                  <GridListTileBar
+                    title={game.name}
+                    actionIcon={
+                      <IconButton onClick={() => this.props.likeGame(game.id)}>
+                        <ThumbUp />
+                      </IconButton>
+                    }
+                  />
+                </GridListTile>
               ))}
             </GridList>
           </div>

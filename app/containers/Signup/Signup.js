@@ -49,29 +49,31 @@ const Signup = props => {
           <ListSubheader>Faça seu cadastro:</ListSubheader>
           <TextField
             style={styles.elementStyle}
-            hintText="Email"
+            placeholder="Email"
             value={props.email}
             onChange={handleOnChangeEmail}
           />
           <TextField
             style={styles.elementStyle}
             type="password"
-            hintText="Password"
+            placeholder="Password"
             value={props.password}
             onChange={handleOnChangePassword}
           />
           <Button
             variant="raised"
-            label="Cadastrar"
             style={styles.login_button}
             onClick={props.trySignUp}
-          />
+          >
+            Cadastrar
+          </Button>
           <Button
             variant="raised"
-            label="Voltar para login"
             style={styles.sign_up_button}
             onClick={props.goBack}
-          />
+          >
+            Voltar para login
+          </Button>
         </VerticalContainer>
       </Paper>
     </VerticalContainer>
