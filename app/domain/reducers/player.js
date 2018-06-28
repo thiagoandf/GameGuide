@@ -19,7 +19,7 @@ const initialState = Map({
 function playerReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_LIKED_GAMES:
-      return state.update('likedGames', (set) => set.add(action.gameId));
+      return state.update('likedGames', set => set.add(action.gameId));
     case LOAD_RECOMMENDATIONS:
       return state.set('recommendedGames', Set(action.recommendations));
     case UPDATE_LOGIN_EMAIL:

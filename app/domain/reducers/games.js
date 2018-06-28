@@ -9,7 +9,7 @@ function gamesReducer(state = initialState, action) {
     case LOAD_GAME_LIST:
       return Set(action.gameList);
     default:
-      return state.map((game) => gameReducer(game, action));
+      return state.map(game => gameReducer(game, action));
   }
 }
 

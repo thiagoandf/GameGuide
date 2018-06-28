@@ -16,17 +16,17 @@ export const requestGameList = () => ({
   type: REQUEST_GAME_LIST,
 });
 
-export const loadGameList = (gameList) => ({
+export const loadGameList = gameList => ({
   type: LOAD_GAME_LIST,
   gameList,
 });
 
-export const likeGame = (gameId) => ({
+export const likeGame = gameId => ({
   type: LIKE_GAME,
   gameId,
 });
 
-export const updateLikedGames = (gameId) => ({
+export const updateLikedGames = gameId => ({
   type: UPDATE_LIKED_GAMES,
   gameId,
 });
@@ -35,7 +35,7 @@ export const requestRecommendations = () => ({
   type: REQUEST_RECOMMENDATIONS,
 });
 
-export const loadRecommendations = (recommendations) => ({
+export const loadRecommendations = recommendations => ({
   type: LOAD_RECOMMENDATIONS,
   recommendations,
 });
@@ -46,7 +46,7 @@ export const tryLogin = (email, password) => ({
   password,
 });
 
-export const loadToken = (token) => ({
+export const loadToken = token => ({
   type: LOAD_TOKEN,
   token,
 });
@@ -55,12 +55,12 @@ export const trySignUp = () => ({
   type: TRY_SIGNUP,
 });
 
-export const updateLoginEmail = (email) => ({
+export const updateLoginEmail = email => ({
   type: UPDATE_LOGIN_EMAIL,
   email,
 });
 
-export const updateLoginPassword = (password) => ({
+export const updateLoginPassword = password => ({
   type: UPDATE_LOGIN_PASSWORD,
   password,
 });
