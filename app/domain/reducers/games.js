@@ -1,15 +1,13 @@
-import { Set } from 'immutable';
-import gameReducer from './game';
 import { LOAD_GAME_LIST } from '../constants';
 
-const initialState = Set();
+const initialState = [];
 
 function gamesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_GAME_LIST:
-      return Set(action.gameList);
+      return action.gameList;
     default:
-      return state.map(game => gameReducer(game, action));
+      return state;
   }
 }
 

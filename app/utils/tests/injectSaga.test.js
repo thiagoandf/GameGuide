@@ -19,7 +19,7 @@ function* testSaga() {
 }
 
 describe('injectSaga decorator', () => {
-  let store;
+  let reduxStore;
   let injectors;
   let ComponentWithSaga;
 
@@ -28,7 +28,8 @@ describe('injectSaga decorator', () => {
   });
 
   beforeEach(() => {
-    store = configureStore({}, memoryHistory);
+    const { store } = configureStore({}, memoryHistory).store;
+    reduxStore = store;
     injectors = {
       injectSaga: jest.fn(),
       ejectSaga: jest.fn(),
@@ -43,7 +44,7 @@ describe('injectSaga decorator', () => {
 
   it('should inject given saga, mode, and props', () => {
     const props = { test: 'test' };
-    shallow(<ComponentWithSaga {...props} />, { context: { store } });
+    shallow(<ComponentWithSaga {...props} />, { context: { reduxStore } });
 
     expect(injectors.injectSaga).toHaveBeenCalledTimes(1);
     expect(injectors.injectSaga).toHaveBeenCalledWith(
@@ -56,7 +57,7 @@ describe('injectSaga decorator', () => {
   it('should eject on unmount with a correct saga key', () => {
     const props = { test: 'test' };
     const renderedComponent = shallow(<ComponentWithSaga {...props} />, {
-      context: { store },
+      context: { reduxStore },
     });
     renderedComponent.unmount();
 
@@ -74,7 +75,7 @@ describe('injectSaga decorator', () => {
   it('should propagate props', () => {
     const props = { testProp: 'test' };
     const renderedComponent = shallow(<ComponentWithSaga {...props} />, {
-      context: { store },
+      context: { reduxStore },
     });
 
     expect(renderedComponent.prop('testProp')).toBe('test');

@@ -1,16 +1,15 @@
 import { createSelector } from 'reselect';
 
-const selectDomain = state => state.get('domain');
-const selectGames = createSelector(selectDomain, domain => domain.get('games'));
-const selectPlayer = createSelector(selectDomain, domain =>
-  domain.get('player'),
-);
-const selectRecommendationIds = createSelector(selectPlayer, player =>
-  player.get('recommendedGames'),
+const selectDomain = state => state.domain;
+const selectGames = createSelector(selectDomain, domain => domain.games);
+const selectPlayer = createSelector(selectDomain, domain => domain.player);
+const selectRecommendationIds = createSelector(
+  selectPlayer,
+  player => player.recommendedGames,
 );
 
 export const makeSelectGameList = () =>
-  createSelector(selectGames, games => games.toJS());
+  createSelector(selectGames, games => games);
 
 export const makeSelectGame = id =>
   createSelector(
@@ -20,16 +19,19 @@ export const makeSelectGame = id =>
   );
 
 export const makeSelectPlayer = () =>
-  createSelector(selectPlayer, player => player.toJS());
+  createSelector(selectPlayer, player => player);
 
-export const selectPlayerEmail = createSelector(selectPlayer, player =>
-  player.get('email'),
+export const selectPlayerEmail = createSelector(
+  selectPlayer,
+  player => player.email,
 );
-export const selectPlayerPassword = createSelector(selectPlayer, player =>
-  player.get('password'),
+export const selectPlayerPassword = createSelector(
+  selectPlayer,
+  player => player.password,
 );
-export const selectPlayerToken = createSelector(selectPlayer, player =>
-  player.get('token'),
+export const selectPlayerToken = createSelector(
+  selectPlayer,
+  player => player.token,
 );
 
 export const makeSelectRecommendations = () =>
@@ -37,5 +39,7 @@ export const makeSelectRecommendations = () =>
     selectGames,
     selectRecommendationIds,
     (games, recommendations) =>
-      games.filter(game => recommendations.has(game.id)).toJS(),
+      games.filter(game =>
+        recommendations.find(recommendation => recommendation === game.id),
+      ),
   );

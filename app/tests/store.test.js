@@ -6,27 +6,28 @@ import { browserHistory } from 'react-router-dom';
 import configureStore from '../configureStore';
 
 describe('configureStore', () => {
-  let store;
+  let reduxStore;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    const { store } = configureStore({}, browserHistory);
+    reduxStore = store;
   });
 
   describe('injectedReducers', () => {
     it('should contain an object for reducers', () => {
-      expect(typeof store.injectedReducers).toBe('object');
+      expect(typeof reduxStore.injectedReducers).toBe('object');
     });
   });
 
   describe('injectedSagas', () => {
     it('should contain an object for sagas', () => {
-      expect(typeof store.injectedSagas).toBe('object');
+      expect(typeof reduxStore.injectedSagas).toBe('object');
     });
   });
 
   describe('runSaga', () => {
     it('should contain a hook for `sagaMiddleware.run`', () => {
-      expect(typeof store.runSaga).toBe('function');
+      expect(typeof reduxStore.runSaga).toBe('function');
     });
   });
 });

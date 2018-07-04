@@ -1,4 +1,3 @@
-import { Map, Set } from 'immutable';
 import {
   UPDATE_LIKED_GAMES,
   LOAD_RECOMMENDATIONS,
@@ -7,27 +6,27 @@ import {
   UPDATE_LOGIN_PASSWORD,
 } from '../constants';
 
-const initialState = Map({
+const initialState = {
   email: '',
   password: '',
   token: '',
-  likedGames: Set(),
-  dislikedGames: Set(),
-  recommendedGames: Set(),
-});
+  likedGames: [],
+  dislikedGames: [],
+  recommendedGames: [],
+};
 
 function playerReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_LIKED_GAMES:
-      return state.update('likedGames', set => set.add(action.gameId));
+      return { ...state, likedGames: [...state.likedGames, action.gameId] };
     case LOAD_RECOMMENDATIONS:
-      return state.set('recommendedGames', Set(action.recommendations));
+      return { ...state, recommendedGames: action.recommendations };
     case UPDATE_LOGIN_EMAIL:
-      return state.set('email', action.email);
+      return { ...state, email: action.email };
     case UPDATE_LOGIN_PASSWORD:
-      return state.set('password', action.password);
+      return { ...state, password: action.password };
     case LOAD_TOKEN:
-      return state.set('token', action.token);
+      return { ...state, token: action.token };
     default:
       return state;
   }

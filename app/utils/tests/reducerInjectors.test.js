@@ -3,7 +3,6 @@
  */
 
 import { memoryHistory } from 'react-router-dom';
-import { fromJS } from 'immutable';
 import identity from 'lodash/identity';
 
 import configureStore from '../../configureStore';
@@ -12,7 +11,7 @@ import getInjectors, { injectReducerFactory } from '../reducerInjectors';
 
 // Fixtures
 
-const initialState = fromJS({ reduced: 'soon' });
+const initialState = { reduced: 'soon' };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,16 +23,17 @@ const reducer = (state = initialState, action) => {
 };
 
 describe('reducer injectors', () => {
-  let store;
+  let reduxStore;
   let injectReducer;
 
   describe('getInjectors', () => {
     beforeEach(() => {
-      store = configureStore({}, memoryHistory);
+      const { store } = configureStore({}, memoryHistory);
+      reduxStore = store;
     });
 
     it('should return injectors', () => {
-      expect(getInjectors(store)).toEqual(
+      expect(getInjectors(reduxStore)).toEqual(
         expect.objectContaining({
           injectReducer: expect.any(Function),
         }),
@@ -41,16 +41,16 @@ describe('reducer injectors', () => {
     });
 
     it('should throw if passed invalid store shape', () => {
-      Reflect.deleteProperty(store, 'dispatch');
+      Reflect.deleteProperty(reduxStore, 'dispatch');
 
-      expect(() => getInjectors(store)).toThrow();
+      expect(() => getInjectors(reduxStore)).toThrow();
     });
   });
 
   describe('injectReducer helper', () => {
     beforeEach(() => {
-      store = configureStore({}, memoryHistory);
-      injectReducer = injectReducerFactory(store, true);
+      reduxStore = configureStore({}, memoryHistory);
+      injectReducer = injectReducerFactory(reduxStore, true);
     });
 
     it('should check a store if the second argument is falsy', () => {
@@ -60,7 +60,7 @@ describe('reducer injectors', () => {
     });
 
     it('it should not check a store if the second argument is true', () => {
-      Reflect.deleteProperty(store, 'dispatch');
+      Reflect.deleteProperty(reduxStore, 'dispatch');
 
       expect(() => injectReducer('test', reducer)).not.toThrow();
     });
@@ -74,26 +74,26 @@ describe('reducer injectors', () => {
     it('given a store, it should provide a function to inject a reducer', () => {
       injectReducer('test', reducer);
 
-      const actual = store.getState().get('test');
+      const actual = reduxStore.getState().get('test');
       const expected = initialState;
 
-      expect(actual.toJS()).toEqual(expected.toJS());
+      expect(actual).toEqual(expected);
     });
 
     it('should not assign reducer if already existing', () => {
-      store.replaceReducer = jest.fn();
+      reduxStore.replaceReducer = jest.fn();
       injectReducer('test', reducer);
       injectReducer('test', reducer);
 
-      expect(store.replaceReducer).toHaveBeenCalledTimes(1);
+      expect(reduxStore.replaceReducer).toHaveBeenCalledTimes(1);
     });
 
     it('should assign reducer if different implementation for hot reloading', () => {
-      store.replaceReducer = jest.fn();
+      reduxStore.replaceReducer = jest.fn();
       injectReducer('test', reducer);
       injectReducer('test', identity);
 
-      expect(store.replaceReducer).toHaveBeenCalledTimes(2);
+      expect(reduxStore.replaceReducer).toHaveBeenCalledTimes(2);
     });
   });
 });

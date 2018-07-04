@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the gameDetail state domain
  */
-const selectGameDetailDomain = state => state.get('gameDetail');
+const selectGameDetailDomain = state => state.gameDetail;
 
 /**
  * Other specific selectors
@@ -14,7 +14,7 @@ const selectGameDetailDomain = state => state.get('gameDetail');
  */
 
 const makeSelectGameDetail = () =>
-  createSelector(selectGameDetailDomain, substate => substate.toJS());
+  createSelector(selectGameDetailDomain, substate => substate);
 
 export default makeSelectGameDetail;
 export { selectGameDetailDomain };
