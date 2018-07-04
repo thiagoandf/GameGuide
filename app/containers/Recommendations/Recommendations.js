@@ -6,6 +6,7 @@ import {
   Paper,
   ListSubheader,
   Avatar,
+  ListItemText,
 } from '@material-ui/core';
 import VerticalContainer from '../../components/VerticalContainer';
 import MainAppBar from '../../components/MainAppBar';
@@ -32,11 +33,11 @@ class Recommendations extends React.Component {
               {this.props.recommendedGames.map(game => (
                 <ListItem
                   key={game.id}
-                  primaryText={game.name}
-                  secondaryText={game.year}
-                  leftAvatar={<Avatar src={game.coverImage} />}
                   onClick={() => this.props.goToGameDetail(game.id)}
-                />
+                >
+                  <Avatar src={game.coverImage} />
+                  <ListItemText primary={game.name} secondary={game.year} />
+                </ListItem>
               ))}
             </List>
           </Paper>
