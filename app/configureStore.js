@@ -3,10 +3,9 @@
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistStore } from 'redux-persist';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
-import createPersistedReducer from './reducers';
+import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -33,7 +32,7 @@ export default function configureStore(initialState = {}, history) {
   /* eslint-enable */
 
   const store = createStore(
-    createPersistedReducer(),
+    createReducer(),
     initialState,
     composeEnhancers(...enhancers),
   );
@@ -47,10 +46,9 @@ export default function configureStore(initialState = {}, history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      store.replaceReducer(createPersistedReducer(store.injectedReducers));
+      store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
 
-  const persistor = persistStore(store);
-  return { store, persistor };
+  return store;
 }

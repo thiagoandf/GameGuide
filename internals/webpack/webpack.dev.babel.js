@@ -21,7 +21,7 @@ const plugins = [
   }),
   new webpack.DefinePlugin({
     'process.env': {
-      ACKBAR_URL: JSON.stringify('http://ackbar.dev.gameguide.com.br'),
+      ACKBAR_URL: JSON.stringify('https://ackbar.azurewebsites.net'),
     },
   }),
   new CircularDependencyPlugin({

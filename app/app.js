@@ -14,7 +14,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import { PersistGate } from 'redux-persist/integration/react';
 
 import {
   MuiThemeProvider,
@@ -42,13 +41,17 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+import { loadState, saveState } from './localStorage';
+
 // Import CSS reset and Global Styles
 import './global-styles';
 
 // Create redux store with history
-const initialState = {};
+const persistedState = loadState();
 const history = createHistory();
-const { store, persistor } = configureStore(initialState, history);
+const store = configureStore(persistedState, history);
+store.subscribe(() => saveState(store.getState()));
+
 const MOUNT_NODE = document.getElementById('app');
 
 const theme = createMuiTheme({
@@ -62,14 +65,12 @@ const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ConnectedRouter history={history}>
-            <MuiThemeProvider theme={theme}>
-              <CssBaseline />
-              <App />
-            </MuiThemeProvider>
-          </ConnectedRouter>
-        </PersistGate>
+        <ConnectedRouter history={history}>
+          <MuiThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </MuiThemeProvider>
+        </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE,

@@ -1,22 +1,12 @@
 /**
  * Combine all reducers in this file and export the combined reducers.
  */
-
 import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web and AsyncStorage for react-native
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 import domainReducer from './domain/reducer';
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: hardSet,
-};
 
 /*
  * routeReducer
@@ -47,18 +37,11 @@ export function routeReducer(state = routeInitialState, action) {
 /**
  * Creates the main reducer with the dynamically injected ones
  */
-export function createReducer(injectedReducers) {
+export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
     domain: domainReducer,
     ...injectedReducers,
   });
-}
-
-/**
- * Persists main reducer
- */
-export default function createPersistedReducer(injectedReducers) {
-  return persistReducer(persistConfig, createReducer(injectedReducers));
 }
