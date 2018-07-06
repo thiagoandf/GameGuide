@@ -5,13 +5,16 @@ import { push } from 'react-router-redux';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import reducer from 'domain/reducer';
-import { selectPlayerEmail, selectPlayerPassword } from 'domain/selectors';
+import {
+  selectPlayerEmail,
+  selectPlayerPassword,
+} from '../../state/domain/selectors';
 import {
   updateLoginEmail,
   updateLoginPassword,
   tryLogin,
-} from 'domain/actions';
+} from '../../state/domain/actions';
+import reducer from '../../state/domain/reducer';
 
 import saga from './saga';
 import HomePage from './HomePage';

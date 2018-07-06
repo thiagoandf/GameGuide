@@ -7,7 +7,7 @@ import {
   getRecommendations,
   postLogin,
   postSignup,
-} from 'api/ackbar';
+} from '../../api/ackbar';
 
 import {
   updateLikedGames,
