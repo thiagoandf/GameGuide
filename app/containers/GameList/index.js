@@ -13,7 +13,7 @@ import {
 import { requestGameList, likeGame } from '../../state/domain/actions';
 
 import saga from './saga';
-import GameList from './GameList';
+import GameList from '../../ui/pages/GameList';
 
 const mapStateToProps = createStructuredSelector({
   gameList: makeSelectGameList(),

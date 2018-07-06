@@ -8,8 +8,8 @@ import {
   GridListTileBar,
 } from '@material-ui/core';
 import { ThumbUp } from '@material-ui/icons';
-import VerticalContainer from '../../components/VerticalContainer';
-import MainAppBar from '../../components/MainAppBar';
+import VerticalContainer from '../components/VerticalContainer';
+import MainAppBar from '../components/MainAppBar';
 
 const styles = {
   buttonStyle: {

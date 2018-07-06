@@ -16,7 +16,7 @@ import {
   trySignUp,
 } from '../../state/domain/actions';
 
-import Signup from './Signup';
+import Signup from '../../ui/pages/Signup';
 import saga from './saga';
 
 const mapStateToProps = createStructuredSelector({

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Paper, Button, TextField, ListSubheader } from '@material-ui/core';
-import VerticalContainer from '../../components/VerticalContainer';
-import LogoHeader from '../../components/LogoHeader';
+import VerticalContainer from '../components/VerticalContainer';
+import LogoHeader from '../components/LogoHeader';
 
 const styles = {
   elementStyle: {

@@ -13,7 +13,7 @@ import reducer from '../../state/domain/reducer';
 import { makeSelectRecommendations } from '../../state/domain/selectors';
 
 import saga from './saga';
-import Recommendations from './Recommendations';
+import Recommendations from '../../ui/pages/Recommendations';
 
 const mapStateToProps = createStructuredSelector({
   recommendedGames: makeSelectRecommendations(),

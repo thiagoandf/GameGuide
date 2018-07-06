@@ -8,8 +8,8 @@ import {
   CardHeader,
   Button,
 } from '@material-ui/core';
-import VerticalContainer from '../../components/VerticalContainer';
-import MainAppBar from '../../components/MainAppBar';
+import VerticalContainer from '../components/VerticalContainer';
+import MainAppBar from '../components/MainAppBar';
 
 class GameDetail extends React.Component {
   componentDidMount() {

@@ -82,7 +82,7 @@ module.exports = require('./webpack.base.babel')({
       theme_color: '#b1624d',
       icons: [
         {
-          src: path.resolve('app/images/icon-512x512.png'),
+          src: path.resolve('app/ui/images/icon-512x512.png'),
           sizes: [72, 96, 120, 128, 144, 152, 167, 180, 192, 384, 512],
         },
       ],

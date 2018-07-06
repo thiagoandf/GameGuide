@@ -9,7 +9,7 @@ import reducer from '../../state/domain/reducer';
 import { requestGameList } from '../../state/domain/actions';
 import saga from './saga';
 
-import GameDetail from './GameDetail';
+import GameDetail from '../../ui/pages/GameDetail';
 
 const mapStateToProps = (state, ownProps) => ({
   game: makeSelectGame(ownProps.match.params.id)(state),

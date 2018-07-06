@@ -17,7 +17,7 @@ import {
 import reducer from '../../state/domain/reducer';
 
 import saga from './saga';
-import HomePage from './HomePage';
+import HomePage from '../../ui/pages/HomePage';
 
 const mapStateToProps = createStructuredSelector({
   email: selectPlayerEmail,

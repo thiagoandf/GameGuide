@@ -8,8 +8,8 @@ import {
   Avatar,
   ListItemText,
 } from '@material-ui/core';
-import VerticalContainer from '../../components/VerticalContainer';
-import MainAppBar from '../../components/MainAppBar';
+import VerticalContainer from '../components/VerticalContainer';
+import MainAppBar from '../components/MainAppBar';
 
 class Recommendations extends React.Component {
   componentDidMount() {
