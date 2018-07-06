@@ -1,6 +1,6 @@
-import { changeLocale } from '../actions';
+import { changeLocale } from '../../../state/language/actions';
 
-import { CHANGE_LOCALE } from '../constants';
+import { CHANGE_LOCALE } from '../../../state/language/constants';
 
 describe('LanguageProvider actions', () => {
   describe('Change Local Action', () => {

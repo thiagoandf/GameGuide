@@ -43,6 +43,9 @@ import { translationMessages } from './i18n';
 
 import { loadState, saveState } from './localStorage';
 
+// Import CSS reset and Global Styles
+import './global-styles';
+
 // Create redux store with history
 const persistedState = loadState();
 const history = createHistory();
