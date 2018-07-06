@@ -7,9 +7,9 @@ import { put } from 'redux-saga/effects';
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import configureStore from '../../configureStore';
-import injectSaga from '../injectSaga';
-import * as sagaInjectors from '../sagaInjectors';
+import configureStore from '../../../configureStore';
+import injectSaga from '../../../utils/injectSaga';
+import * as sagaInjectors from '../../../utils/sagaInjectors';
 
 // Fixtures
 const Component = () => null;

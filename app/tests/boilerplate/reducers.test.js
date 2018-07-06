@@ -3,7 +3,7 @@
  */
 
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { routeReducer } from '../reducers';
+import { routeReducer } from '../../reducers';
 
 describe('route reducer', () => {
   it('should return the initial state', () => {

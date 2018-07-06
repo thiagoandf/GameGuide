@@ -65,7 +65,11 @@ class GameList extends React.Component {
           />
           <div style={styles.root}>
             <GridList cellHeight={200} style={styles.gridList}>
-              <ListSubheader>Mostre-nos quais jogos você curte!</ListSubheader>
+              <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                <ListSubheader>
+                  Mostre-nos quais jogos você curte!
+                </ListSubheader>
+              </GridListTile>
               {this.props.gameList.map(game => (
                 <GridListTile key={game.id}>
                   <img
