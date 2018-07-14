@@ -4,9 +4,9 @@
 import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import languageProviderReducer from './state/language/reducer';
 
-import domainReducer from './domain/reducer';
+import domainReducer from './state/domain/reducer';
 
 /*
  * routeReducer

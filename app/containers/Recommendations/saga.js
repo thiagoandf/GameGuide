@@ -1,7 +1,13 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
-import { requestGameList, requestRecommendations } from 'domain/sagas';
-import { REQUEST_GAME_LIST, REQUEST_RECOMMENDATIONS } from 'domain/constants';
+import {
+  requestGameList,
+  requestRecommendations,
+} from '../../state/domain/sagas';
+import {
+  REQUEST_GAME_LIST,
+  REQUEST_RECOMMENDATIONS,
+} from '../../state/domain/constants';
 
 export default function* defaultSaga() {
   yield all([

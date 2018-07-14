@@ -4,12 +4,12 @@ import { push, goBack } from 'react-router-redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectGame } from 'domain/selectors';
-import reducer from 'domain/reducer';
-import { requestGameList } from 'domain/actions';
+import { makeSelectGame } from '../../state/domain/selectors';
+import reducer from '../../state/domain/reducer';
+import { requestGameList } from '../../state/domain/actions';
 import saga from './saga';
 
-import GameDetail from './GameDetail';
+import GameDetail from '../../ui/pages/GameDetail';
 
 const mapStateToProps = (state, ownProps) => ({
   game: makeSelectGame(ownProps.match.params.id)(state),

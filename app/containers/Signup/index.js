@@ -5,15 +5,18 @@ import { push } from 'react-router-redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import reducer from 'domain/reducer';
-import { selectPlayerEmail, selectPlayerPassword } from 'domain/selectors';
+import reducer from '../../state/domain/reducer';
+import {
+  selectPlayerEmail,
+  selectPlayerPassword,
+} from '../../state/domain/selectors';
 import {
   updateLoginEmail,
   updateLoginPassword,
   trySignUp,
-} from 'domain/actions';
+} from '../../state/domain/actions';
 
-import Signup from './Signup';
+import Signup from '../../ui/pages/Signup';
 import saga from './saga';
 
 const mapStateToProps = createStructuredSelector({

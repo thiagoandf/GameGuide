@@ -3,14 +3,17 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
-import { requestRecommendations, requestGameList } from 'domain/actions';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import reducer from 'domain/reducer';
-import { makeSelectRecommendations } from 'domain/selectors';
+import {
+  requestRecommendations,
+  requestGameList,
+} from '../../state/domain/actions';
+import reducer from '../../state/domain/reducer';
+import { makeSelectRecommendations } from '../../state/domain/selectors';
 
 import saga from './saga';
-import Recommendations from './Recommendations';
+import Recommendations from '../../ui/pages/Recommendations';
 
 const mapStateToProps = createStructuredSelector({
   recommendedGames: makeSelectRecommendations(),
