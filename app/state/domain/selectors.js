@@ -1,25 +1,25 @@
 import { createSelector } from 'reselect';
 
 const selectDomain = state => state.domain;
-const selectGames = createSelector(selectDomain, domain => domain.games);
-const selectPlayer = createSelector(selectDomain, domain => domain.player);
+
+export const selectGames = createSelector(selectDomain, domain => domain.games);
+
+export const selectPlayer = createSelector(
+  selectDomain,
+  domain => domain.player,
+);
+
 const selectRecommendationIds = createSelector(
   selectPlayer,
   player => player.recommendedGames,
 );
 
-export const makeSelectGameList = () =>
-  createSelector(selectGames, games => games);
-
 export const makeSelectGame = id =>
   createSelector(
-    makeSelectGameList(),
+    selectGames,
     // TODO: ensure it is sorted and binary search
     games => games.find(item => item.id === +id),
   );
-
-export const makeSelectPlayer = () =>
-  createSelector(selectPlayer, player => player);
 
 export const selectPlayerEmail = createSelector(
   selectPlayer,
@@ -34,12 +34,11 @@ export const selectPlayerToken = createSelector(
   player => player.token,
 );
 
-export const makeSelectRecommendations = () =>
-  createSelector(
-    selectGames,
-    selectRecommendationIds,
-    (games, recommendations) =>
-      games.filter(game =>
-        recommendations.find(recommendation => recommendation === game.id),
-      ),
-  );
+export const selectRecommendations = createSelector(
+  selectGames,
+  selectRecommendationIds,
+  (games, recommendations) =>
+    games.filter(game =>
+      recommendations.find(recommendation => recommendation === game.id),
+    ),
+);

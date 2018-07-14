@@ -1,28 +1,22 @@
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 import { push } from 'react-router-redux';
-
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
-import reducer from '../../state/domain/reducer';
-import {
-  makeSelectGameList,
-  makeSelectPlayer,
-} from '../../state/domain/selectors';
-import { requestGameList, likeGame } from '../../state/domain/actions';
-
-import saga from './saga';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import ackbar from '../../api/ackbar';
+import makeDomainActions from '../../state/domain/actions';
+import { selectGames, selectPlayer } from '../../state/domain/selectors';
 import GameList from '../../ui/pages/GameList';
 
+const domainActions = makeDomainActions(ackbar);
+
 const mapStateToProps = createStructuredSelector({
-  gameList: makeSelectGameList(),
-  player: makeSelectPlayer(),
+  gameList: selectGames,
+  player: selectPlayer,
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestGameList: () => dispatch(requestGameList()),
-  likeGame: id => dispatch(likeGame(id)),
+  requestGameList: () => dispatch(domainActions.requestGameList()),
+  likeGame: id => dispatch(domainActions.likeGame(id)),
   goToRecommendations: () => dispatch(push('/recommendations')),
   goToGameList: () => dispatch(push('/games')),
   goToGameDetail: gameId => dispatch(push(`/game/${gameId}`)),
@@ -34,11 +28,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'domain', reducer });
-const withSaga = injectSaga({ key: 'domain', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(GameList);
+export default compose(withConnect)(GameList);

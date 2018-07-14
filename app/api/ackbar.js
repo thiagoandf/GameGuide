@@ -32,3 +32,11 @@ export const postLogin = (email, password) =>
 
 export const postSignup = (email, password) =>
   requestAckbar('api/User/Signup', 'POST', { email, password });
+
+export default {
+  getGameList,
+  postLikeGame,
+  getRecommendations,
+  postLogin,
+  postSignup,
+};
