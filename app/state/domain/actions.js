@@ -1,87 +1,97 @@
 import { push } from 'react-router-redux';
-
 import {
   LOAD_GAME_LIST,
-  UPDATE_LIKED_GAMES,
   LOAD_RECOMMENDATIONS,
   LOAD_TOKEN,
+  UPDATE_LIKED_GAMES,
   UPDATE_LOGIN_EMAIL,
   UPDATE_LOGIN_PASSWORD,
 } from './constants';
 import {
-  selectPlayerToken,
   selectPlayerEmail,
   selectPlayerPassword,
+  selectPlayerToken,
 } from './selectors';
-import {
+
+export default ({
   postLikeGame,
   getGameList,
   getRecommendations,
   postLogin,
   postSignup,
-} from '../../api/ackbar';
+}) => {
+  const requestGameList = () => dispatch => {
+    getGameList().then(gameList => {
+      dispatch(loadGameList(gameList));
+    });
+  };
 
-export const requestGameList = () => dispatch => {
-  getGameList().then(gameList => {
-    dispatch(loadGameList(gameList));
+  const loadGameList = gameList => ({
+    type: LOAD_GAME_LIST,
+    gameList,
   });
-};
 
-const loadGameList = gameList => ({
-  type: LOAD_GAME_LIST,
-  gameList,
-});
+  const likeGame = gameId => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    postLikeGame(gameId, token).then(() => dispatch(updateLikedGames(gameId)));
+  };
 
-export const likeGame = gameId => (dispatch, getState) => {
-  const token = selectPlayerToken(getState());
-  postLikeGame(gameId, token).then(() => dispatch(updateLikedGames(gameId)));
-};
-
-const updateLikedGames = gameId => ({
-  type: UPDATE_LIKED_GAMES,
-  gameId,
-});
-
-export const requestRecommendations = () => (dispatch, getState) => {
-  const token = selectPlayerToken(getState());
-  getRecommendations(token).then(recommendations => {
-    dispatch(loadRecommendations(recommendations));
+  const updateLikedGames = gameId => ({
+    type: UPDATE_LIKED_GAMES,
+    gameId,
   });
-};
 
-const loadRecommendations = recommendations => ({
-  type: LOAD_RECOMMENDATIONS,
-  recommendations,
-});
+  const requestRecommendations = () => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    getRecommendations(token).then(recommendations => {
+      dispatch(loadRecommendations(recommendations));
+    });
+  };
 
-export const tryLogin = (email, password) => dispatch => {
-  postLogin(email, password).then(({ token }) => {
-    dispatch(loadToken(token));
-    dispatch(push('/recommendations'));
+  const loadRecommendations = recommendations => ({
+    type: LOAD_RECOMMENDATIONS,
+    recommendations,
   });
-};
 
-const loadToken = token => ({
-  type: LOAD_TOKEN,
-  token,
-});
+  const tryLogin = (email, password) => dispatch => {
+    postLogin(email, password).then(({ token }) => {
+      dispatch(loadToken(token));
+      dispatch(push('/recommendations'));
+    });
+  };
 
-export const trySignUp = () => (dispatch, getState) => {
-  const state = getState();
-  const email = selectPlayerEmail(state);
-  const password = selectPlayerPassword(state);
-  postSignup(email, password).then(({ token }) => {
-    dispatch(loadToken(token));
-    dispatch(push('/games'));
+  const loadToken = token => ({
+    type: LOAD_TOKEN,
+    token,
   });
+
+  const trySignUp = () => (dispatch, getState) => {
+    const state = getState();
+    const email = selectPlayerEmail(state);
+    const password = selectPlayerPassword(state);
+    postSignup(email, password).then(({ token }) => {
+      dispatch(loadToken(token));
+      dispatch(push('/games'));
+    });
+  };
+
+  const updateLoginEmail = email => ({
+    type: UPDATE_LOGIN_EMAIL,
+    email,
+  });
+
+  const updateLoginPassword = password => ({
+    type: UPDATE_LOGIN_PASSWORD,
+    password,
+  });
+
+  return {
+    requestGameList,
+    likeGame,
+    requestRecommendations,
+    tryLogin,
+    trySignUp,
+    updateLoginEmail,
+    updateLoginPassword,
+  };
 };
-
-export const updateLoginEmail = email => ({
-  type: UPDATE_LOGIN_EMAIL,
-  email,
-});
-
-export const updateLoginPassword = password => ({
-  type: UPDATE_LOGIN_PASSWORD,
-  password,
-});

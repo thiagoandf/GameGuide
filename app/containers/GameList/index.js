@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 import { push } from 'react-router-redux';
-
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import ackbar from '../../api/ackbar';
+import makeDomainActions from '../../state/domain/actions';
 import { selectGames, selectPlayer } from '../../state/domain/selectors';
-import { requestGameList, likeGame } from '../../state/domain/actions';
-
 import GameList from '../../ui/pages/GameList';
+
+const domainActions = makeDomainActions(ackbar);
 
 const mapStateToProps = createStructuredSelector({
   gameList: selectGames,
@@ -14,8 +15,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestGameList: () => dispatch(requestGameList()),
-  likeGame: id => dispatch(likeGame(id)),
+  requestGameList: () => dispatch(domainActions.requestGameList()),
+  likeGame: id => dispatch(domainActions.likeGame(id)),
   goToRecommendations: () => dispatch(push('/recommendations')),
   goToGameList: () => dispatch(push('/games')),
   goToGameDetail: gameId => dispatch(push(`/game/${gameId}`)),
