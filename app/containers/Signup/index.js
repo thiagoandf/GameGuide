@@ -3,9 +3,6 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import reducer from '../../state/domain/reducer';
 import {
   selectPlayerEmail,
   selectPlayerPassword,
@@ -17,7 +14,6 @@ import {
 } from '../../state/domain/actions';
 
 import Signup from '../../ui/pages/Signup';
-import saga from './saga';
 
 const mapStateToProps = createStructuredSelector({
   email: selectPlayerEmail,
@@ -36,11 +32,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'domain', reducer });
-const withSaga = injectSaga({ key: 'domain', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(Signup);
+export default compose(withConnect)(Signup);

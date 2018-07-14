@@ -3,8 +3,6 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
 import {
   selectPlayerEmail,
   selectPlayerPassword,
@@ -14,9 +12,7 @@ import {
   updateLoginPassword,
   tryLogin,
 } from '../../state/domain/actions';
-import reducer from '../../state/domain/reducer';
 
-import saga from './saga';
 import HomePage from '../../ui/pages/HomePage';
 
 const mapStateToProps = createStructuredSelector({
@@ -44,11 +40,4 @@ const withConnect = connect(
   mergeProps,
 );
 
-const withReducer = injectReducer({ key: 'domain', reducer });
-const withSaga = injectSaga({ key: 'domain', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(HomePage);
+export default compose(withConnect)(HomePage);

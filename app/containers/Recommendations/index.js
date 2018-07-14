@@ -3,16 +3,12 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
 import {
   requestRecommendations,
   requestGameList,
 } from '../../state/domain/actions';
-import reducer from '../../state/domain/reducer';
 import { makeSelectRecommendations } from '../../state/domain/selectors';
 
-import saga from './saga';
 import Recommendations from '../../ui/pages/Recommendations';
 
 const mapStateToProps = createStructuredSelector({
@@ -33,11 +29,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'domain', reducer });
-const withSaga = injectSaga({ key: 'domain', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(Recommendations);
+export default compose(withConnect)(Recommendations);
