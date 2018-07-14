@@ -7,12 +7,12 @@ import {
   requestRecommendations,
   requestGameList,
 } from '../../state/domain/actions';
-import { makeSelectRecommendations } from '../../state/domain/selectors';
+import { selectRecommendations } from '../../state/domain/selectors';
 
 import Recommendations from '../../ui/pages/Recommendations';
 
 const mapStateToProps = createStructuredSelector({
-  recommendedGames: makeSelectRecommendations(),
+  recommendedGames: selectRecommendations,
 });
 
 const mapDispatchToProps = dispatch => ({
