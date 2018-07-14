@@ -1,23 +1,16 @@
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 import { push } from 'react-router-redux';
-
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import ackbar from '../../api/ackbar';
+import makeDomainActions from '../../state/domain/actions';
 import {
   selectPlayerEmail,
   selectPlayerPassword,
 } from '../../state/domain/selectors';
-import {
-  updateLoginEmail,
-  updateLoginPassword,
-  tryLogin,
-} from '../../state/domain/actions';
-import reducer from '../../state/domain/reducer';
-
-import saga from './saga';
 import HomePage from '../../ui/pages/HomePage';
+
+const domainActions = makeDomainActions(ackbar);
 
 const mapStateToProps = createStructuredSelector({
   email: selectPlayerEmail,
@@ -25,9 +18,11 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeEmail: email => dispatch(updateLoginEmail(email)),
-  onChangePassword: password => dispatch(updateLoginPassword(password)),
-  tryLogin: (email, password) => dispatch(tryLogin(email, password)),
+  onChangeEmail: email => dispatch(domainActions.updateLoginEmail(email)),
+  onChangePassword: password =>
+    dispatch(domainActions.updateLoginPassword(password)),
+  tryLogin: (email, password) =>
+    dispatch(domainActions.tryLogin(email, password)),
   goToSignup: () => dispatch(push('/signup')),
 });
 
@@ -44,11 +39,4 @@ const withConnect = connect(
   mergeProps,
 );
 
-const withReducer = injectReducer({ key: 'domain', reducer });
-const withSaga = injectSaga({ key: 'domain', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(HomePage);
+export default compose(withConnect)(HomePage);
