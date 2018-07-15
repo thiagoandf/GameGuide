@@ -33,7 +33,9 @@ export default ({
 
   const likeGame = gameId => (dispatch, getState) => {
     const token = selectPlayerToken(getState());
-    postLikeGame(gameId, token).then(() => dispatch(updateLikedGames(gameId)));
+    postLikeGame(gameId, token)
+      .then(() => dispatch(updateLikedGames(gameId)))
+      .catch(() => {});
   };
 
   const updateLikedGames = gameId => ({

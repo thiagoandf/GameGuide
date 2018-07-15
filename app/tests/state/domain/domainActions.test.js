@@ -1,24 +1,11 @@
 import makeDomainActions from '../../../state/domain/actions';
-import domainReducer from '../../../state/domain/reducer';
+import configureStore from '../../../configureStore';
 
-const initialState = {
-  domain: {
-    player: {},
-    games: [],
-  },
-};
-
-let state;
-
-const dispatch = action => {
-  state.domain = domainReducer(state.domain, action);
-};
-
-const getState = () => state;
+let store = configureStore();
 
 describe('Domain actions', () => {
   beforeEach(() => {
-    state = initialState;
+    store = configureStore();
   });
 
   describe('Request game list', () => {
@@ -28,24 +15,31 @@ describe('Domain actions', () => {
         getGameList: () => Promise.resolve(mockGames),
       });
 
-      const thunk = domainActions.requestGameList();
-      await thunk(dispatch, getState);
+      await store.dispatch(domainActions.requestGameList());
 
-      expect(state.domain.games).toEqual(mockGames);
+      expect(store.getState().domain.games).toEqual(mockGames);
     });
   });
 
   describe('Like game', () => {
     it('Should add liked game to local field if update is successful', async () => {
-      state.domain.player = { likedGames: [] };
       const domainActions = makeDomainActions({
         postLikeGame: () => Promise.resolve(),
       });
 
-      const thunk = domainActions.likeGame(42);
-      await thunk(dispatch, getState);
+      await store.dispatch(domainActions.likeGame(42));
 
-      expect(state.domain.player.likedGames).toEqual([42]);
+      expect(store.getState().domain.player.likedGames).toEqual([42]);
+    });
+
+    it('Should not add liked game to local field if update is not successful', async () => {
+      const domainActions = makeDomainActions({
+        postLikeGame: () => Promise.reject(),
+      });
+
+      await store.dispatch(domainActions.likeGame(42));
+
+      expect(store.getState().domain.player.likedGames).toEqual([]);
     });
   });
 });
