@@ -21,7 +21,7 @@ shell.mv(
 shell.cp('app/tests/i18n.test.js', 'internals/templates/tests/i18n.test.js');
 
 // Cleanup components/
-shell.rm('-rf', 'app/components/*');
+shell.rm('-rf', 'app/ui/components/*');
 
 // Handle containers/
 shell.rm('-rf', 'app/containers');

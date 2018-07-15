@@ -1,0 +1,5 @@
+{
+  "app.components.LogoHeader.header": "This is the LogoHeader component !",
+  "app.components.MainAppBar.header": "This is the MainAppBar component !",
+  "app.components.NotFoundPage.header": "This is NotFoundPage component!"
+}
