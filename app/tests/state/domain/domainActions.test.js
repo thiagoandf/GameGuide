@@ -1,5 +1,11 @@
 import makeDomainActions from '../../../state/domain/actions';
 import configureStore from '../../../configureStore';
+import {
+  selectGames,
+  selectPlayerLikedGames,
+  selectRecommendationIds,
+  selectPlayerToken,
+} from '../../../state/domain/selectors';
 
 let store;
 
@@ -17,7 +23,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.requestGameList());
 
-      expect(store.getState().domain.games).toEqual(mockGames);
+      expect(selectGames(store.getState())).toEqual(mockGames);
     });
   });
 
@@ -29,7 +35,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.likeGame(42));
 
-      expect(store.getState().domain.player.likedGames).toEqual([42]);
+      expect(selectPlayerLikedGames(store.getState())).toEqual([42]);
     });
 
     it('Should not add liked game to local field if update is not successful', async () => {
@@ -39,7 +45,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.likeGame(42));
 
-      expect(store.getState().domain.player.likedGames).toEqual([]);
+      expect(selectPlayerLikedGames(store.getState())).toEqual([]);
     });
   });
 
@@ -52,7 +58,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.requestRecommendations());
 
-      expect(store.getState().domain.player.recommendedGames).toEqual(
+      expect(selectRecommendationIds(store.getState())).toEqual(
         mockRecommendations,
       );
     });
@@ -67,7 +73,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.tryLogin());
 
-      expect(store.getState().domain.player.token).toEqual(mockToken);
+      expect(selectPlayerToken(store.getState())).toEqual(mockToken);
     });
 
     it('Should not have token if unsuccessful', async () => {
@@ -77,7 +83,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.tryLogin());
 
-      expect(store.getState().domain.player.token).toEqual('');
+      expect(selectPlayerToken(store.getState())).toEqual('');
     });
   });
 
@@ -90,7 +96,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.trySignUp());
 
-      expect(store.getState().domain.player.token).toEqual(mockToken);
+      expect(selectPlayerToken(store.getState())).toEqual(mockToken);
     });
 
     it('Should not have token if unsuccessful', async () => {
@@ -100,7 +106,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.trySignUp());
 
-      expect(store.getState().domain.player.token).toEqual('');
+      expect(selectPlayerToken(store.getState())).toEqual('');
     });
   });
 });

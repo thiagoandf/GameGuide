@@ -9,7 +9,7 @@ export const selectPlayer = createSelector(
   domain => domain.player,
 );
 
-const selectRecommendationIds = createSelector(
+export const selectRecommendationIds = createSelector(
   selectPlayer,
   player => player.recommendedGames,
 );
@@ -32,6 +32,11 @@ export const selectPlayerPassword = createSelector(
 export const selectPlayerToken = createSelector(
   selectPlayer,
   player => player.token,
+);
+
+export const selectPlayerLikedGames = createSelector(
+  selectPlayer,
+  player => player.likedGames,
 );
 
 export const selectRecommendations = createSelector(
