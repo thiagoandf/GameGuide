@@ -5,11 +5,8 @@ import {
 } from '../constants';
 
 const initialState = {
-  email: '',
-  password: '',
   token: '',
   likedGames: [],
-  dislikedGames: [],
   recommendedGames: [],
 };
 
