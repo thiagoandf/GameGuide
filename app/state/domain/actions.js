@@ -4,14 +4,8 @@ import {
   LOAD_RECOMMENDATIONS,
   LOAD_TOKEN,
   UPDATE_LIKED_GAMES,
-  UPDATE_LOGIN_EMAIL,
-  UPDATE_LOGIN_PASSWORD,
 } from './constants';
-import {
-  selectPlayerEmail,
-  selectPlayerPassword,
-  selectPlayerToken,
-} from './selectors';
+import { selectPlayerToken } from './selectors';
 
 export default ({
   postLikeGame,
@@ -33,7 +27,9 @@ export default ({
 
   const likeGame = gameId => (dispatch, getState) => {
     const token = selectPlayerToken(getState());
-    postLikeGame(gameId, token).then(() => dispatch(updateLikedGames(gameId)));
+    postLikeGame(gameId, token)
+      .then(() => dispatch(updateLikedGames(gameId)))
+      .catch(() => {});
   };
 
   const updateLikedGames = gameId => ({
@@ -65,25 +61,12 @@ export default ({
     token,
   });
 
-  const trySignUp = () => (dispatch, getState) => {
-    const state = getState();
-    const email = selectPlayerEmail(state);
-    const password = selectPlayerPassword(state);
+  const trySignUp = (email, password) => dispatch => {
     postSignup(email, password).then(({ token }) => {
       dispatch(loadToken(token));
       dispatch(push('/games'));
     });
   };
-
-  const updateLoginEmail = email => ({
-    type: UPDATE_LOGIN_EMAIL,
-    email,
-  });
-
-  const updateLoginPassword = password => ({
-    type: UPDATE_LOGIN_PASSWORD,
-    password,
-  });
 
   return {
     requestGameList,
@@ -91,7 +74,5 @@ export default ({
     requestRecommendations,
     tryLogin,
     trySignUp,
-    updateLoginEmail,
-    updateLoginPassword,
   };
 };

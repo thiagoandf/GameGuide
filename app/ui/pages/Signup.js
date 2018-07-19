@@ -32,59 +32,66 @@ const styles = {
   },
 };
 
-const Signup = props => {
-  const handleOnChangeEmail = event => {
-    props.onChangeEmail(event.target.value);
+class Signup extends React.Component {
+  state = {
+    email: '',
+    password: '',
   };
 
-  const handleOnChangePassword = event => {
-    props.onChangePassword(event.target.value);
+  handleOnChangeEmail = event => {
+    this.setState({ email: event.target.value });
   };
 
-  return (
-    <VerticalContainer>
-      <LogoHeader />
-      <Paper style={styles.paper}>
-        <VerticalContainer>
-          <ListSubheader>Faça seu cadastro:</ListSubheader>
-          <TextField
-            style={styles.elementStyle}
-            placeholder="Email"
-            value={props.email}
-            onChange={handleOnChangeEmail}
-          />
-          <TextField
-            style={styles.elementStyle}
-            type="password"
-            placeholder="Password"
-            value={props.password}
-            onChange={handleOnChangePassword}
-          />
-          <Button
-            variant="raised"
-            style={styles.login_button}
-            onClick={props.trySignUp}
-          >
-            Cadastrar
-          </Button>
-          <Button
-            variant="raised"
-            style={styles.sign_up_button}
-            onClick={props.goBack}
-          >
-            Voltar para login
-          </Button>
-        </VerticalContainer>
-      </Paper>
-    </VerticalContainer>
-  );
-};
+  handleOnChangePassword = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  onSubmit = () => {
+    this.props.trySignUp(this.state.email, this.state.password);
+  };
+
+  render() {
+    return (
+      <VerticalContainer>
+        <LogoHeader />
+        <Paper style={styles.paper}>
+          <VerticalContainer>
+            <ListSubheader>Faça seu cadastro:</ListSubheader>
+            <TextField
+              style={styles.elementStyle}
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.handleOnChangeEmail}
+            />
+            <TextField
+              style={styles.elementStyle}
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.handleOnChangePassword}
+            />
+            <Button
+              variant="raised"
+              style={styles.login_button}
+              onClick={this.onSubmit}
+            >
+              Cadastrar
+            </Button>
+            <Button
+              variant="raised"
+              style={styles.sign_up_button}
+              onClick={this.props.goBack}
+            >
+              Voltar para login
+            </Button>
+          </VerticalContainer>
+        </Paper>
+      </VerticalContainer>
+    );
+  }
+}
 
 Signup.propTypes = {
-  email: PropTypes.string,
-  password: PropTypes.string,
-  onChangeEmail: PropTypes.func.isRequired, // eslint-disable-line
-  onChangePassword: PropTypes.func.isRequired,
   trySignUp: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
