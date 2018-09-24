@@ -12,13 +12,18 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 
+const styles = theme => ({
+  appBar: {
+    backgroundColor: theme.palette.primary.main,
+  },
+});
+
 class MainAppBar extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor() {
     super();
     this.state = { open: false };
   }
-
   handleToggle = () => this.setState({ open: !this.state.open });
 
   handleGoToRecommendations = () => {
@@ -37,9 +42,10 @@ class MainAppBar extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <React.Fragment>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Toolbar>
             <IconButton
               color="inherit"
