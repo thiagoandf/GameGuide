@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
+  withStyles,
   AppBar,
   Toolbar,
   Typography,
@@ -81,4 +81,4 @@ MainAppBar.propTypes = {
   classes: PropTypes.object,
 };
 
-export default MainAppBar;
+export default withStyles(styles)(MainAppBar);
