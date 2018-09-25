@@ -43,7 +43,6 @@ class MainAppBar extends React.Component {
   };
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { classes } = this.props;
     return (
       <React.Fragment>
@@ -79,6 +78,7 @@ MainAppBar.propTypes = {
   goToRecommendations: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  classes: PropTypes.object,
 };
 
 export default MainAppBar;
