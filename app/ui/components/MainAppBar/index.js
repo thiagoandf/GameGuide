@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   AppBar,
@@ -42,6 +43,7 @@ class MainAppBar extends React.Component {
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { classes } = this.props;
     return (
       <React.Fragment>
