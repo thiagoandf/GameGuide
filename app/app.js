@@ -20,7 +20,6 @@ import {
   CssBaseline,
   createMuiTheme,
 } from '@material-ui/core';
-import { orange, amber } from '@material-ui/core/colors';
 
 import 'sanitize.css/sanitize.css';
 
@@ -56,8 +55,42 @@ const MOUNT_NODE = document.getElementById('app');
 
 const theme = createMuiTheme({
   palette: {
-    primary: amber,
-    secondary: orange,
+    primary: {
+      dark: '#2E492A',
+      main: '#3C5B37',
+      light: '#537A4D',
+    },
+    secondary: {
+      dark: '#1A2129',
+      main: '#313F4C',
+      light: '#495D6D',
+    },
+    ggRed: {
+      dark: '#B85047',
+      main: '#D95C56',
+      light: '#F16567',
+    },
+    ggBrown: {
+      dark: '#3D271C',
+      main: '#5B3A2C',
+      light: '#774C3E',
+    },
+    ggGrey: {
+      dark: '#5F6A76',
+      main: '#798793',
+      light: '#95A6B2',
+    },
+    ggYellow: {
+      dark: '#FDCA73',
+      main: '#F7D4A1',
+      light: '#FBE8D2',
+    },
+  },
+  typography: {
+    fontSize: 14,
+  },
+  spacing: {
+    gg: 10,
   },
 });
 
