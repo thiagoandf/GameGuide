@@ -21,14 +21,6 @@ export const makeSelectGame = id =>
     games => games.find(item => item.id === +id),
   );
 
-export const selectPlayerEmail = createSelector(
-  selectPlayer,
-  player => player.email,
-);
-export const selectPlayerPassword = createSelector(
-  selectPlayer,
-  player => player.password,
-);
 export const selectPlayerToken = createSelector(
   selectPlayer,
   player => player.token,

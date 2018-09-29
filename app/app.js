@@ -20,7 +20,6 @@ import {
   CssBaseline,
   createMuiTheme,
 } from '@material-ui/core';
-import { orange, amber } from '@material-ui/core/colors';
 
 import 'sanitize.css/sanitize.css';
 
@@ -89,6 +88,9 @@ const theme = createMuiTheme({
   },
   typography: {
     fontSize: 14,
+  },
+  spacing: {
+    gg: 10,
   },
 });
 

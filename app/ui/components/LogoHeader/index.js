@@ -1,31 +1,35 @@
-/**
- *
- * LogoHeader
- *
- */
+/* eslint-disable react/prefer-stateless-function */
 
+import { withStyles } from '@material-ui/core';
 import React from 'react';
-import styled from 'styled-components';
-import Logo from '../../images/logo.png';
+import PropTypes from 'prop-types';
+import Logo from '../../images/logo.svg';
 
-const StyledLogoHeader = styled.div`
-  padding-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
+const styles = theme => ({
+  styledLogoHeader: {
+    paddinTop: theme.spacing.gg * 4,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+});
 
-function LogoHeader() {
-  return (
-    <StyledLogoHeader>
-      <img src={Logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
-      <h1>GameGuide</h1>
-    </StyledLogoHeader>
-  );
+class LogoHeader extends React.Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.styledLogoHeader}>
+        <img src={Logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+        <h1>GameGuide</h1>
+      </div>
+    );
+  }
 }
 
-LogoHeader.propTypes = {};
+LogoHeader.propTypes = {
+  classes: PropTypes.any,
+};
 
-export default LogoHeader;
+export default withStyles(styles)(LogoHeader);
