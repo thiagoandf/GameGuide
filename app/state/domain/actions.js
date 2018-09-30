@@ -93,7 +93,14 @@ export default ({
   const tryLogin = (email, password) => dispatch => {
     postLogin(email, password).then(({ token }) => {
       dispatch(loadToken(token));
-      dispatch(push('/recommendations'));
+      getCustomerInfo(token)
+        .then(info => {
+          dispatch(loadCustomerInfo(info));
+          dispatch(push('/report'));
+        })
+        .catch(() => {
+          dispatch(push('/recommendations'));
+        });
     });
   };
 
