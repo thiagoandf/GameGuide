@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  withStyles,
   AppBar,
   Toolbar,
   Typography,
@@ -77,6 +78,7 @@ MainAppBar.propTypes = {
   goToRecommendations: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  classes: PropTypes.object,
 };
 
-export default MainAppBar;
+export default withStyles(styles)(MainAppBar);
