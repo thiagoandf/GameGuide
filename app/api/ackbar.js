@@ -45,6 +45,9 @@ export const postLikeGame = (gameId, token) =>
 export const postOwnGame = (gameId, token) =>
   requestAckbar(`api/Player/OwnGame/${gameId}`, 'POST', { token });
 
+export const getPlayerInfo = token =>
+  requestAckbar(`api/Player/Info`, 'GET', { token });
+
 export const getRecommendations = token =>
   requestAckbar('api/Player/Recommendations', 'GET', { token });
 
@@ -64,6 +67,7 @@ export default {
   postViewGame,
   postLikeGame,
   postOwnGame,
+  getPlayerInfo,
   getRecommendations,
   postLogin,
   getReportUrls,
