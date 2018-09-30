@@ -5,19 +5,20 @@ import {
   LOAD_RECOMMENDATIONS,
   LOAD_TOKEN,
   UPDATE_RELATIONSHIP,
+  LOAD_CUSTOMER_INFO,
 } from './constants';
 import { selectPlayerToken } from './selectors';
 
 export default ({
   getGameList,
-  // postPlayerSignup,
+  postPlayerSignup,
   postViewGame,
   postLikeGame,
   postOwnGame,
   getPlayerInfo,
   getRecommendations,
   postLogin,
-  // getReportUrls,
+  getCustomerInfo,
   postSignup,
 }) => {
   const requestGameList = () => dispatch => {
@@ -108,8 +109,40 @@ export default ({
     });
   };
 
+  const tryPlayerSignup = (
+    email,
+    password,
+    avatarUrl,
+    collectionSize,
+    weeklyPlayTime,
+  ) => dispatch => {
+    postPlayerSignup(
+      email,
+      password,
+      avatarUrl,
+      collectionSize,
+      weeklyPlayTime,
+    ).then(({ token }) => {
+      dispatch(loadToken(token));
+      dispatch(push('/games'));
+    });
+  };
+
+  const requestCustomerInfo = () => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    getCustomerInfo(token)
+      .then(info => dispatch(loadCustomerInfo(info)))
+      .catch(() => {});
+  };
+
+  const loadCustomerInfo = info => ({
+    type: LOAD_CUSTOMER_INFO,
+    info,
+  });
+
   return {
     requestGameList,
+    requestCustomerInfo,
     viewGame,
     likeGame,
     ownGame,
@@ -117,5 +150,6 @@ export default ({
     requestRecommendations,
     tryLogin,
     trySignUp,
+    tryPlayerSignup,
   };
 };

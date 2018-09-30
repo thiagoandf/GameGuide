@@ -54,8 +54,8 @@ export const getRecommendations = token =>
 export const postLogin = (email, password) =>
   requestAckbar('api/User/Login', 'POST', { email, password });
 
-export const getReportUrls = token =>
-  requestAckbar('api/Customer/GetReportUrl', 'GET', { token });
+export const getCustomerInfo = token =>
+  requestAckbar('api/Customer/Info', 'GET', { token });
 
 // deprecated
 export const postSignup = (email, password) =>
@@ -70,6 +70,6 @@ export default {
   getPlayerInfo,
   getRecommendations,
   postLogin,
-  getReportUrls,
+  getCustomerInfo,
   postSignup,
 };
