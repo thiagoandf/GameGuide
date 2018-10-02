@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 
-import { withStyles } from '@material-ui/core';
+import { withStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../../images/logo.svg';
@@ -14,6 +14,9 @@ const styles = theme => ({
     justifyContent: 'center',
     width: '100%',
   },
+  gameGuide: {
+    padding: '30px',
+  },
 });
 
 class LogoHeader extends React.Component {
@@ -22,7 +25,9 @@ class LogoHeader extends React.Component {
     return (
       <div className={classes.styledLogoHeader}>
         <img src={Logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
-        <h1>GameGuide</h1>
+        <Typography variant="headline" className={classes.gameGuide}>
+          Game Guide
+        </Typography>
       </div>
     );
   }
