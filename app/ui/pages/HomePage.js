@@ -53,6 +53,9 @@ const styles = theme => ({
       height: '45px',
       marginTop: theme.spacing.gg * 4,
     },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   loginButtonText: {
     color: theme.palette.common.white,
@@ -67,9 +70,12 @@ const styles = theme => ({
       height: '25px',
     },
     [theme.breakpoints.up('sm')]: {
-      width: '180px',
-      height: '45px',
+      width: '120px',
+      height: '30px',
       marginTop: theme.spacing.gg * 2,
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
     },
   },
   signUpButtonText: {
@@ -130,7 +136,7 @@ class HomePage extends React.Component {
               input: classes.placeholderClass,
             }}
             placeholder="Password"
-            value={this.state.email}
+            value={this.state.password}
             onChange={this.handleOnChangePassword}
             type="password"
           />

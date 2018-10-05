@@ -45,6 +45,9 @@ const styles = theme => ({
       height: '45px',
       marginTop: theme.spacing.gg * 2,
     },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   signUpButtonText: {
     color: theme.palette.common.white,
@@ -59,9 +62,12 @@ const styles = theme => ({
       height: '25px',
     },
     [theme.breakpoints.up('sm')]: {
-      width: '180px',
-      height: '45px',
+      width: '120px',
+      height: '30px',
       marginTop: theme.spacing.gg * 2,
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
     },
   },
   backButtonText: {
