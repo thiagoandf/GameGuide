@@ -45,14 +45,17 @@ export const postLikeGame = (gameId, token) =>
 export const postOwnGame = (gameId, token) =>
   requestAckbar(`api/Player/OwnGame/${gameId}`, 'POST', { token });
 
+export const getPlayerInfo = token =>
+  requestAckbar(`api/Player/Info`, 'GET', { token });
+
 export const getRecommendations = token =>
   requestAckbar('api/Player/Recommendations', 'GET', { token });
 
 export const postLogin = (email, password) =>
   requestAckbar('api/User/Login', 'POST', { email, password });
 
-export const getReportUrls = token =>
-  requestAckbar('api/Customer/GetReportUrl', 'GET', { token });
+export const getCustomerInfo = token =>
+  requestAckbar('api/Customer/Info', 'GET', { token });
 
 // deprecated
 export const postSignup = (email, password) =>
@@ -64,8 +67,9 @@ export default {
   postViewGame,
   postLikeGame,
   postOwnGame,
+  getPlayerInfo,
   getRecommendations,
   postLogin,
-  getReportUrls,
+  getCustomerInfo,
   postSignup,
 };

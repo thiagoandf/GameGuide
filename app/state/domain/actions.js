@@ -1,17 +1,24 @@
 import { push } from 'react-router-redux';
 import {
+  ADD_RELATIONSHIP,
   LOAD_GAME_LIST,
   LOAD_RECOMMENDATIONS,
   LOAD_TOKEN,
-  UPDATE_LIKED_GAMES,
+  UPDATE_RELATIONSHIP,
+  LOAD_CUSTOMER_INFO,
 } from './constants';
 import { selectPlayerToken } from './selectors';
 
 export default ({
-  postLikeGame,
   getGameList,
+  postPlayerSignup,
+  postViewGame,
+  postLikeGame,
+  postOwnGame,
+  getPlayerInfo,
   getRecommendations,
   postLogin,
+  getCustomerInfo,
   postSignup,
 }) => {
   const requestGameList = () => dispatch => {
@@ -25,16 +32,50 @@ export default ({
     gameList,
   });
 
-  const likeGame = gameId => (dispatch, getState) => {
+  const viewGame = gameId => (dispatch, getState) => {
     const token = selectPlayerToken(getState());
-    postLikeGame(gameId, token)
-      .then(() => dispatch(updateLikedGames(gameId)))
+    postViewGame(gameId, token)
+      .then(() => dispatch(addGameRelationship({ view: [gameId] })))
       .catch(() => {});
   };
 
-  const updateLikedGames = gameId => ({
-    type: UPDATE_LIKED_GAMES,
-    gameId,
+  const likeGame = gameId => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    postLikeGame(gameId, token)
+      .then(() => dispatch(addGameRelationship({ like: [gameId] })))
+      .catch(() => {});
+  };
+
+  const ownGame = gameId => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    postOwnGame(gameId, token)
+      .then(() => dispatch(addGameRelationship({ own: [gameId] })))
+      .catch(() => {});
+  };
+
+  const addGameRelationship = ({ view = [], like = [], own = [] }) => ({
+    type: ADD_RELATIONSHIP,
+    newRelationships: { view, like, own },
+  });
+
+  const requestPlayerInfo = () => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    getPlayerInfo(token)
+      .then(info =>
+        dispatch(
+          updateGameRelationship({
+            view: info.views,
+            like: info.likes,
+            own: info.owns,
+          }),
+        ),
+      )
+      .catch(() => {});
+  };
+
+  const updateGameRelationship = ({ view, like, own }) => ({
+    type: UPDATE_RELATIONSHIP,
+    relationships: { view, like, own },
   });
 
   const requestRecommendations = () => (dispatch, getState) => {
@@ -52,7 +93,14 @@ export default ({
   const tryLogin = (email, password) => dispatch => {
     postLogin(email, password).then(({ token }) => {
       dispatch(loadToken(token));
-      dispatch(push('/recommendations'));
+      getCustomerInfo(token)
+        .then(info => {
+          dispatch(loadCustomerInfo(info));
+          dispatch(push('/report'));
+        })
+        .catch(() => {
+          dispatch(push('/recommendations'));
+        });
     });
   };
 
@@ -68,11 +116,47 @@ export default ({
     });
   };
 
+  const tryPlayerSignup = (
+    email,
+    password,
+    avatarUrl,
+    collectionSize,
+    weeklyPlayTime,
+  ) => dispatch => {
+    postPlayerSignup(
+      email,
+      password,
+      avatarUrl,
+      collectionSize,
+      weeklyPlayTime,
+    ).then(({ token }) => {
+      dispatch(loadToken(token));
+      dispatch(push('/games'));
+    });
+  };
+
+  const requestCustomerInfo = () => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    getCustomerInfo(token)
+      .then(info => dispatch(loadCustomerInfo(info)))
+      .catch(() => {});
+  };
+
+  const loadCustomerInfo = info => ({
+    type: LOAD_CUSTOMER_INFO,
+    info,
+  });
+
   return {
     requestGameList,
+    requestCustomerInfo,
+    viewGame,
     likeGame,
+    ownGame,
+    requestPlayerInfo,
     requestRecommendations,
     tryLogin,
     trySignUp,
+    tryPlayerSignup,
   };
 };
