@@ -52,6 +52,7 @@ const styles = {
 class GameList extends React.Component {
   componentDidMount() {
     this.props.requestGameList();
+    this.props.requestPlayerInfo();
   }
 
   render() {
@@ -108,6 +109,7 @@ GameList.propTypes = {
       coverImage: PropTypes.string,
     }),
   ),
+  requestPlayerInfo: PropTypes.func.isRequired,
   requestGameList: PropTypes.func.isRequired,
   goToRecommendations: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,

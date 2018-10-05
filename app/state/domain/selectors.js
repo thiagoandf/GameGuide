@@ -2,7 +2,11 @@ import { createSelector } from 'reselect';
 
 const selectDomain = state => state.domain;
 
-export const selectGames = createSelector(selectDomain, domain => domain.games);
+const selectGamesMap = createSelector(selectDomain, domain => domain.games);
+
+export const selectGames = createSelector(selectGamesMap, gamesMap =>
+  Object.values(gamesMap),
+);
 
 export const selectPlayer = createSelector(
   selectDomain,
@@ -15,11 +19,7 @@ export const selectRecommendationIds = createSelector(
 );
 
 export const makeSelectGame = id =>
-  createSelector(
-    selectGames,
-    // TODO: ensure it is sorted and binary search
-    games => games.find(item => item.id === +id),
-  );
+  createSelector(selectGamesMap, games => games[id]);
 
 export const selectPlayerToken = createSelector(
   selectPlayer,
@@ -32,10 +32,8 @@ export const selectPlayerLikedGames = createSelector(
 );
 
 export const selectRecommendations = createSelector(
-  selectGames,
+  selectGamesMap,
   selectRecommendationIds,
   (games, recommendations) =>
-    games.filter(game =>
-      recommendations.find(recommendation => recommendation === game.id),
-    ),
+    recommendations.map(recommendation => games[recommendation]),
 );

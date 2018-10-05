@@ -35,7 +35,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.likeGame(42));
 
-      expect(selectPlayerLikedGames(store.getState())).toEqual([42]);
+      expect(selectPlayerLikedGames(store.getState())).toEqual({ 42: true });
     });
 
     it('Should not add liked game to local field if update is not successful', async () => {
@@ -45,7 +45,7 @@ describe('Domain actions', () => {
 
       await store.dispatch(domainActions.likeGame(42));
 
-      expect(selectPlayerLikedGames(store.getState())).toEqual([]);
+      expect(selectPlayerLikedGames(store.getState())).toEqual({});
     });
   });
 
