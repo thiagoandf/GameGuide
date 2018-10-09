@@ -9,6 +9,7 @@ import GameDetail from 'containers/GameDetail/Loadable';
 import Signup from 'containers/Signup/Loadable';
 import SignupAvatar from '../../containers/SignupAvatar/Loadable';
 import ReportPage from '../ReportPage';
+import SignupExperience from '../../ui/pages/SignupExperience';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/report" component={ReportPage} />
         <Route path="/avatar" component={SignupAvatar} />
+        <Route path="/experience" component={SignupExperience} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
