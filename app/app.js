@@ -88,6 +88,20 @@ const theme = createMuiTheme({
   },
   typography: {
     fontSize: 14,
+    gg: {
+      fontSize: '0.65rem',
+      fontWeight: 400,
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif"',
+      lineHeight: '1.46429em',
+      color: 'rgba(0, 0, 0, 0.87)',
+    },
+    ggSmall: {
+      fontSize: '0.5rem',
+      fontWeight: 400,
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif"',
+      lineHeight: '1.3em',
+      color: 'rgba(0, 0, 0, 0.87)',
+    },
   },
   spacing: {
     gg: 10,

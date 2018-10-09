@@ -1,30 +1,36 @@
-/**
- *
- * VerticalContainer
- *
- */
-
 import React from 'react';
-import styled from 'styled-components';
+import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const StyledVerticalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0px;
-  margin-bottom: 5px;
-  max-width: 100%;
-  min-width: 100%;
-`;
+const styles = theme => ({
+  styledVerticalContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 0,
+    marginBottom: theme.spacing.gg / 2,
+    maxWidth: '100%',
+    minWidth: '100%',
+    minHeight: '100vh',
+  },
+});
 
-function VerticalContainer(props) {
-  return <StyledVerticalContainer>{props.children}</StyledVerticalContainer>;
+// eslint-disable-next-line react/prefer-stateless-function
+class VerticalContainer extends React.Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.styledVerticalContainer}>
+        {this.props.children}
+      </div>
+    );
+  }
 }
 
 VerticalContainer.propTypes = {
   children: PropTypes.any,
+  classes: PropTypes.any,
 };
 
-export default VerticalContainer;
+export default withStyles(styles)(VerticalContainer);

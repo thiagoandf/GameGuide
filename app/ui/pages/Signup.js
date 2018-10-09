@@ -1,41 +1,97 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Button, TextField, ListSubheader } from '@material-ui/core';
+import {
+  withStyles,
+  Paper,
+  Button,
+  Typography,
+  Input,
+} from '@material-ui/core';
 import VerticalContainer from '../components/VerticalContainer';
 import LogoHeader from '../components/LogoHeader';
 
-const styles = {
+const styles = theme => ({
   elementStyle: {
-    marginBottom: '7',
-    color: 'white',
+    margin: theme.spacing.gg,
+    width: '75%',
+    maxWidth: '320px',
   },
   paper: {
-    height: '100%',
-    width: '90%',
-    display: 'block',
-    margin: 2,
-    padding: 10,
-  },
-  login_button: {
-    margin: 6,
+    [theme.breakpoints.down('md')]: {
+      height: '300px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      height: '420px',
+    },
+    width: '75%',
+    maxWidth: '450px',
+    display: 'flex',
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingBottom: 5,
-    paddingTop: 5,
-    textColor: 'blue',
-    color: 'blue',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    margin: theme.spacing.gg / 5,
+    padding: theme.spacing.gg,
+    borderRadius: theme.spacing.gg,
   },
-  sign_up_button: {
-    margin: 6,
-    alignItems: 'center',
+  loginButton: {
+    backgroundColor: theme.palette.secondary.light,
+    [theme.breakpoints.down('md')]: {
+      marginTop: theme.spacing.gg,
+      width: '120px',
+      height: '30px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '180px',
+      height: '45px',
+      marginTop: theme.spacing.gg * 2,
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
-};
+  signUpButtonText: {
+    color: theme.palette.common.white,
+    fontSize: theme.typography.gg.fontSize,
+  },
+  signUpButton: {
+    backgroundColor: theme.palette.ggGrey.light,
+    padding: theme.spacing.gg / 2,
+    [theme.breakpoints.down('md')]: {
+      marginTop: theme.spacing.gg,
+      width: '85px',
+      height: '25px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '120px',
+      height: '30px',
+      marginTop: theme.spacing.gg * 2,
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  backButtonText: {
+    color: theme.palette.common.white,
+    fontSize: theme.typography.gg.fontSize,
+  },
+  loginTitle: {
+    paddingBottom: theme.spacing.gg,
+    paddingTop: theme.spacing.gg,
+    textTransform: 'uppercase',
+  },
+  placeholderClass: {
+    '&::placeholder': {
+      color: theme.palette.secondary.light,
+      fontSize: theme.typography.body1.fontSize,
+    },
+  },
+});
 
 class Signup extends React.Component {
   state = {
     email: '',
     password: '',
+    confirmPassword: '',
   };
 
   handleOnChangeEmail = event => {
@@ -45,46 +101,65 @@ class Signup extends React.Component {
   handleOnChangePassword = event => {
     this.setState({ password: event.target.value });
   };
+  handleOnChangeConfirmPassword = event => {
+    this.setState({ confirmPassword: event.target.value });
+    if (this.state.password !== this.state.confirmPassword) {
+      // Show error
+    }
+  };
 
   onSubmit = () => {
     this.props.trySignUp(this.state.email, this.state.password);
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <VerticalContainer>
         <LogoHeader />
-        <Paper style={styles.paper}>
-          <VerticalContainer>
-            <ListSubheader>Faça seu cadastro:</ListSubheader>
-            <TextField
-              style={styles.elementStyle}
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.handleOnChangeEmail}
-            />
-            <TextField
-              style={styles.elementStyle}
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleOnChangePassword}
-            />
-            <Button
-              variant="raised"
-              style={styles.login_button}
-              onClick={this.onSubmit}
-            >
+        <Paper className={classes.paper}>
+          <Typography variant="title" className={classes.loginTitle}>
+            Cadastro
+          </Typography>
+          <Input
+            classes={{
+              root: classes.elementStyle,
+              input: classes.placeholderClass,
+            }}
+            placeholder="E-mail"
+            value={this.state.email}
+            onChange={this.handleOnChangeEmail}
+          />
+          <Input
+            classes={{
+              root: classes.elementStyle,
+              input: classes.placeholderClass,
+            }}
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleOnChangePassword}
+            type="password"
+          />
+          <Input
+            classes={{
+              root: classes.elementStyle,
+              input: classes.placeholderClass,
+            }}
+            placeholder="Confirmar Senha"
+            value={this.state.confirmPassword}
+            onChange={this.handleOnChangeConfirmPassword}
+            type="password"
+          />
+          <Button className={classes.loginButton} onClick={this.onSubmit}>
+            <Typography variant="body1" className={classes.signUpButtonText}>
               Cadastrar
-            </Button>
-            <Button
-              variant="raised"
-              style={styles.sign_up_button}
-              onClick={this.props.goBack}
-            >
-              Voltar para login
-            </Button>
-          </VerticalContainer>
+            </Typography>
+          </Button>
+          <Button className={classes.signUpButton} onClick={this.props.goBack}>
+            <Typography variant="caption" className={classes.backButtonText}>
+              Voltar
+            </Typography>
+          </Button>
         </Paper>
       </VerticalContainer>
     );
@@ -94,6 +169,7 @@ class Signup extends React.Component {
 Signup.propTypes = {
   trySignUp: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
+  classes: PropTypes.any,
 };
 
-export default Signup;
+export default withStyles(styles)(Signup);
