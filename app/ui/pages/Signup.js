@@ -109,7 +109,7 @@ class Signup extends React.Component {
   };
 
   onSubmit = () => {
-    this.props.trySignUp(this.state.email, this.state.password);
+    this.props.addBasicInformation(this.state.email, this.state.password);
   };
 
   render() {
@@ -167,7 +167,7 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  trySignUp: PropTypes.func.isRequired,
+  addBasicInformation: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   classes: PropTypes.any,
 };
