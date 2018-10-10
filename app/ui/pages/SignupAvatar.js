@@ -97,6 +97,10 @@ class SignupAvatar extends React.Component {
     this.setState({ selectedAvatar: i });
   };
 
+  continue = () => {
+    this.props.addAvatar(this.state.selectedAvatar);
+  };
+
   render() {
     const { classes } = this.props;
     const avatars = [
@@ -158,7 +162,7 @@ class SignupAvatar extends React.Component {
             </ButtonBase>
           ))}
         </div>
-        <Button className={classes.continueButton}>
+        <Button className={classes.continueButton} onClick={this.continue}>
           <Typography variant="body1" className={classes.continueButtonText}>
             Continuar
           </Typography>
@@ -170,6 +174,7 @@ class SignupAvatar extends React.Component {
 
 SignupAvatar.propTypes = {
   classes: PropTypes.any,
+  addAvatar: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SignupAvatar);

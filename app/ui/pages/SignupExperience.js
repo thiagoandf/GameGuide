@@ -72,6 +72,11 @@ class SignupExperience extends React.Component {
     owns: 0,
   };
 
+  nextPage = () => {
+    console.log('called', this.props);
+    this.props.addTheFuckingHistory(this.state.hours, this.state.owns);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -127,7 +132,7 @@ class SignupExperience extends React.Component {
             }}
           />
         </div>
-        <Button className={classes.continueButton}>
+        <Button className={classes.continueButton} onClick={this.nextPage}>
           <Typography variant="body1" className={classes.continueButtonText}>
             Continuar
           </Typography>
@@ -138,6 +143,7 @@ class SignupExperience extends React.Component {
 }
 
 SignupExperience.propTypes = {
+  addTheFuckingHistory: PropTypes.func,
   classes: PropTypes.any,
 };
 

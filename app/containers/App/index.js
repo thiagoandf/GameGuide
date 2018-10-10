@@ -7,9 +7,9 @@ import GameList from 'containers/GameList/Loadable';
 import Recommendations from 'containers/Recommendations/Loadable';
 import GameDetail from 'containers/GameDetail/Loadable';
 import Signup from 'containers/Signup/Loadable';
+import SignupExperience from 'containers/SignupExperience';
 import SignupAvatar from '../../containers/SignupAvatar/Loadable';
 import ReportPage from '../ReportPage';
-import SignupExperience from '../../ui/pages/SignupExperience';
 
 export default function App() {
   return (

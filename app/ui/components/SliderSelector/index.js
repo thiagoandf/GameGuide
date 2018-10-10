@@ -80,7 +80,7 @@ SliderSelector.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.number,
   classes: PropTypes.object,
-  suffix: PropTypes.string,
+  suffix: PropTypes.any,
   min: PropTypes.number,
   steps: PropTypes.number,
   disabled: PropTypes.bool,

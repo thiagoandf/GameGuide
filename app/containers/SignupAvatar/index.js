@@ -2,9 +2,11 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { compose } from 'redux';
 import SignupAvatar from '../../ui/pages/SignupAvatar';
+import { addAvatarAndPush } from '../../state/registration/actions';
 
 const mapDispatchToProps = dispatch => ({
-  goNext: () => dispatch(push('/signup/3')),
+  addAvatar: avatarUrl => dispatch(addAvatarAndPush(avatarUrl)),
+  goNext: () => dispatch(push('/experience')),
   goBack: () => dispatch(push('/')),
 });
 
