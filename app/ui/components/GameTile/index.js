@@ -53,6 +53,10 @@ class GameTile extends React.Component {
             alt={this.props.game.name}
             width={`${this.props.width || 125}px`}
             height={`${this.props.height || 125}px`}
+            style={{
+              borderBottomLeftRadius: '5px',
+              borderBottomRightRadius: '5px',
+            }}
           />
         </div>
         <div
@@ -62,7 +66,13 @@ class GameTile extends React.Component {
             width: `${this.props.width || 125}px`,
           }}
         >
-          <Typography variant="body1">{this.props.game.name}</Typography>
+          <Typography
+            variant="body1"
+            noWrap
+            style={{ width: `${this.props.height - 30 || 85}px` }}
+          >
+            {this.props.game.name}
+          </Typography>
         </div>
         {this.props.rightButton && (
           <IconButton

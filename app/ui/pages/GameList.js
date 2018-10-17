@@ -81,7 +81,7 @@ class GameList extends React.Component {
                   <GridListTileBar
                     title={game.name}
                     actionIcon={
-                      <IconButton onClick={() => this.props.likeGame(game.id)}>
+                      <IconButton onClick={() => this.props.likeGame(game)}>
                         <ThumbUp />
                       </IconButton>
                     }

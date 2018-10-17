@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Typography, AppBar, Button } from '@material-ui/core';
+import {
+  withStyles,
+  Typography,
+  AppBar,
+  Button,
+  Input,
+} from '@material-ui/core';
 import VerticalContainer from '../components/VerticalContainer';
-import GameTile from '../components/GameTile';
+import GameGrid from '../components/GameGrid';
 
 const styles = theme => ({
   appBar: {
@@ -40,12 +46,15 @@ class SignupHistory extends React.Component {
   componentDidMount() {
     this.props.requestGameList();
   }
-  state = {};
+  state = {
+    gameList: this.props.gameList,
+  };
 
   nextPage = () => {};
 
   render() {
     const { classes } = this.props;
+
     return (
       <VerticalContainer>
         <AppBar position="absolute" className={classes.appBar}>
@@ -65,20 +74,23 @@ class SignupHistory extends React.Component {
             que você já jogou.
           </Typography>
         </div>
+        <Input
+          onChange={e => {
+            this.setState({
+              gameList: this.props.gameList.filter(game =>
+                game.name.toUpperCase().includes(e.target.value.toUpperCase()),
+              ),
+            });
+            console.log(this.state.gameList);
+          }}
+        />
         <div style={{ display: 'flex', flexDirection: 'row' }}>
-          {this.props.gameList.map(game => (
-            <div key={game.name} style={{ padding: '10px' }}>
-              <GameTile
-                game={game}
-                rightButton
-                onClick={() => {
-                  this.setState({
-                    game: { ...this.state.game, likes: !this.state.likes },
-                  });
-                }}
-              />
-            </div>
-          ))}
+          <GameGrid
+            gameList={this.state.gameList}
+            width="100%"
+            height="250px"
+            onClick={game => this.props.likeGame(game.id)}
+          />
           {/* TODO: REPLACE WITH ACTION DISPATCH */}
         </div>
         <Button className={classes.continueButton} onClick={this.nextPage}>
@@ -105,7 +117,7 @@ SignupHistory.propTypes = {
     }),
   ),
   requestGameList: PropTypes.func.isRequired,
-  // likeGame: PropTypes.func.isRequired,
+  likeGame: PropTypes.func.isRequired,
   classes: PropTypes.any,
 };
 
