@@ -16,6 +16,15 @@ const styles = theme => ({
     width: '75%',
     maxWidth: '320px',
   },
+  confirmPassword: {
+    borderColor: 'rgba(255,61,53,0.8)',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderRadius: '5px',
+    margin: theme.spacing.gg,
+    width: '75%',
+    maxWidth: '320px',
+  },
   paper: {
     [theme.breakpoints.down('md')]: {
       height: '300px',
@@ -85,6 +94,15 @@ const styles = theme => ({
       fontSize: theme.typography.body1.fontSize,
     },
   },
+  errorMessage: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    height: 'auto',
+  },
+  errorMessageText: {
+    color: '#ff3d35',
+  },
 });
 
 class Signup extends React.Component {
@@ -92,6 +110,7 @@ class Signup extends React.Component {
     email: '',
     password: '',
     confirmPassword: '',
+    errorMessage: 'As senhas não são iguais',
   };
 
   handleOnChangeEmail = event => {
@@ -103,17 +122,20 @@ class Signup extends React.Component {
   };
   handleOnChangeConfirmPassword = event => {
     this.setState({ confirmPassword: event.target.value });
-    if (this.state.password !== this.state.confirmPassword) {
-      // Show error
-    }
   };
 
   onSubmit = () => {
-    this.props.addBasicInformation(this.state.email, this.state.password);
+    if (
+      this.state.password === this.state.confirmPassword &&
+      this.state.password
+    ) {
+      this.props.addBasicInformation(this.state.email, this.state.password);
+    }
   };
 
   render() {
     const { classes } = this.props;
+
     return (
       <VerticalContainer>
         <LogoHeader />
@@ -142,7 +164,10 @@ class Signup extends React.Component {
           />
           <Input
             classes={{
-              root: classes.elementStyle,
+              root:
+                this.state.password !== this.state.confirmPassword
+                  ? classes.confirmPassword
+                  : classes.elementStyle,
               input: classes.placeholderClass,
             }}
             placeholder="Confirmar Senha"
@@ -150,6 +175,13 @@ class Signup extends React.Component {
             onChange={this.handleOnChangeConfirmPassword}
             type="password"
           />
+          {this.state.password !== this.state.confirmPassword && (
+            <div className={classes.errorMessage}>
+              <Typography variant="body1" className={classes.errorMessageText}>
+                {this.state.errorMessage}
+              </Typography>
+            </div>
+          )}
           <Button className={classes.loginButton} onClick={this.onSubmit}>
             <Typography variant="body1" className={classes.signUpButtonText}>
               Cadastrar
