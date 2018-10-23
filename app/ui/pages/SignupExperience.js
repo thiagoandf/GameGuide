@@ -73,7 +73,6 @@ class SignupExperience extends React.Component {
   };
 
   nextPage = () => {
-    console.log('called', this.props);
     this.props.addTheFuckingHistory(this.state.hours, this.state.owns);
   };
 

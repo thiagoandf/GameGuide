@@ -4,7 +4,11 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ackbar from '../../api/ackbar';
 import makeDomainActions from '../../state/domain/actions';
-import { selectGames, selectPlayer } from '../../state/domain/selectors';
+import {
+  selectGames,
+  selectPlayer,
+  selectPlayerLikedGames,
+} from '../../state/domain/selectors';
 import GameList from '../../ui/pages/GameList';
 
 const domainActions = makeDomainActions(ackbar);
@@ -12,6 +16,7 @@ const domainActions = makeDomainActions(ackbar);
 const mapStateToProps = createStructuredSelector({
   gameList: selectGames,
   player: selectPlayer,
+  playerLikedGames: selectPlayerLikedGames,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -84,7 +84,7 @@ class GameTile extends React.Component {
               this.props.onClick();
             }}
           >
-            {this.props.game.likes ? (
+            {this.props.liked ? (
               <Favorite style={{ fill: '#F16567' }} />
             ) : (
               <FavoriteBorder />
@@ -104,6 +104,7 @@ GameTile.propTypes = {
   rightButton: PropTypes.bool,
   onClick: PropTypes.func,
   onView: PropTypes.func,
+  liked: PropTypes.bool,
 };
 
 export default withStyles(styles)(GameTile);

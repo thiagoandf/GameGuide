@@ -45,12 +45,15 @@ const styles = theme => ({
 class SignupHistory extends React.Component {
   componentDidMount() {
     this.props.requestGameList();
+    this.props.requestPlayerInfo();
   }
   state = {
     gameList: this.props.gameList,
   };
 
-  nextPage = () => {};
+  nextPage = () => {
+    this.props.nextPage();
+  };
 
   render() {
     const { classes } = this.props;
@@ -91,8 +94,8 @@ class SignupHistory extends React.Component {
             maxWidth="720px"
             maxHeight="400px"
             onClick={game => this.props.likeGame(game.id)}
+            onView={game => this.props.likeGame(game.id)}
           />
-          {/* TODO: REPLACE WITH ACTION DISPATCH */}
         </div>
         <Button className={classes.continueButton} onClick={this.nextPage}>
           <Typography variant="body1" className={classes.continueButtonText}>
@@ -120,6 +123,8 @@ SignupHistory.propTypes = {
   requestGameList: PropTypes.func.isRequired,
   likeGame: PropTypes.func.isRequired,
   classes: PropTypes.any,
+  nextPage: PropTypes.func,
+  requestPlayerInfo: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SignupHistory);

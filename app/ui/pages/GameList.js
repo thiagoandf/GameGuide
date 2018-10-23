@@ -1,15 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  GridList,
-  GridListTile,
-  IconButton,
-  ListSubheader,
-  GridListTileBar,
-} from '@material-ui/core';
-import { ThumbUp } from '@material-ui/icons';
 import VerticalContainer from '../components/VerticalContainer';
 import MainAppBar from '../components/MainAppBar';
+import GameGrid from '../components/GameGrid';
 
 const styles = {
   buttonStyle: {
@@ -65,30 +58,16 @@ class GameList extends React.Component {
             logout={this.props.logout}
           />
           <div style={styles.root}>
-            <GridList cellHeight={200} style={styles.gridList}>
-              <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                <ListSubheader>
-                  Mostre-nos quais jogos você curte!
-                </ListSubheader>
-              </GridListTile>
-              {this.props.gameList.map(game => (
-                <GridListTile key={game.id}>
-                  <img
-                    src={game.coverImage}
-                    alt="cool game"
-                    style={styles.image}
-                  />
-                  <GridListTileBar
-                    title={game.name}
-                    actionIcon={
-                      <IconButton onClick={() => this.props.likeGame(game)}>
-                        <ThumbUp />
-                      </IconButton>
-                    }
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
+            <GameGrid
+              gameList={this.props.gameList}
+              width="100%"
+              height="40vh"
+              maxWidth="720px"
+              maxHeight="400px"
+              onClick={game => this.props.likeGame(game.id)}
+              onView={game => this.props.goToGameDetail(game.id)}
+              likes={this.props.playerLikedGames}
+            />
           </div>
         </div>
       </VerticalContainer>
@@ -109,6 +88,7 @@ GameList.propTypes = {
       coverImage: PropTypes.string,
     }),
   ),
+  playerLikedGames: PropTypes.array.isRequired,
   requestPlayerInfo: PropTypes.func.isRequired,
   requestGameList: PropTypes.func.isRequired,
   goToRecommendations: PropTypes.func.isRequired,
