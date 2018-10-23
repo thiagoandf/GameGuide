@@ -26,6 +26,8 @@ class GameGrid extends React.Component {
           width: this.props.width || '250px',
           height: this.props.height || '250px',
           padding: this.props.padding || '20px',
+          maxWidth: this.props.maxWidth || '250px',
+          maxHeight: this.props.maxHeight || '250px',
         }}
         className={classes.root}
       >
@@ -35,8 +37,7 @@ class GameGrid extends React.Component {
               game={game}
               rightButton
               onClick={() => {
-                console.log(game.id);
-                this.props.onClick(game.id);
+                this.props.onClick(game);
               }}
             />
           </div>
@@ -49,6 +50,8 @@ class GameGrid extends React.Component {
 GameGrid.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
+  maxWidth: PropTypes.string,
+  maxHeight: PropTypes.string,
   classes: PropTypes.object,
   gameList: PropTypes.array,
   padding: PropTypes.number,

@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  List,
-  ListItem,
-  Paper,
-  ListSubheader,
-  Avatar,
-  ListItemText,
-} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import VerticalContainer from '../components/VerticalContainer';
 import MainAppBar from '../components/MainAppBar';
+import GameGrid from '../components/GameGrid';
 
 class Recommendations extends React.Component {
   componentDidMount() {
@@ -25,22 +19,16 @@ class Recommendations extends React.Component {
             goToGameList={this.props.goToGameList}
             logout={this.props.logout}
           />
-          <Paper>
-            <List>
-              <ListSubheader>
-                Nosso sistema recomenda para você estes jogos:
-              </ListSubheader>
-              {this.props.recommendedGames.map(game => (
-                <ListItem
-                  key={game.id}
-                  onClick={() => this.props.goToGameDetail(game.id)}
-                >
-                  <Avatar src={game.coverImage} />
-                  <ListItemText primary={game.name} secondary={game.year} />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
+          <Typography />
+          <GameGrid
+            gameList={this.props.recommendedGames}
+            width="90%"
+            maxWidth="560px"
+            height="150px"
+            onClick={game => {
+              console.log(game);
+            }}
+          />
         </div>
       </VerticalContainer>
     );

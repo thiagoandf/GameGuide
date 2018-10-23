@@ -81,14 +81,15 @@ class SignupHistory extends React.Component {
                 game.name.toUpperCase().includes(e.target.value.toUpperCase()),
               ),
             });
-            console.log(this.state.gameList);
           }}
         />
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <GameGrid
             gameList={this.state.gameList}
             width="100%"
-            height="250px"
+            height="40vh"
+            maxWidth="720px"
+            maxHeight="400px"
             onClick={game => this.props.likeGame(game.id)}
           />
           {/* TODO: REPLACE WITH ACTION DISPATCH */}
