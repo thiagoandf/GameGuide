@@ -95,6 +95,7 @@ class SignupHistory extends React.Component {
             maxHeight="400px"
             onClick={game => this.props.likeGame(game.id)}
             onView={game => this.props.likeGame(game.id)}
+            likes={this.props.playerLikedGames}
           />
         </div>
         <Button className={classes.continueButton} onClick={this.nextPage}>
@@ -125,6 +126,7 @@ SignupHistory.propTypes = {
   classes: PropTypes.any,
   nextPage: PropTypes.func,
   requestPlayerInfo: PropTypes.func.isRequired,
+  playerLikedGames: PropTypes.object,
 };
 
 export default withStyles(styles)(SignupHistory);

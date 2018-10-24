@@ -138,6 +138,7 @@ class SignupAvatar extends React.Component {
         <div className={classes.avatarWrapper}>
           {avatars.map((a, i) => (
             <ButtonBase
+              key={Math.random()}
               style={{ borderRadius: '35px' }}
               onClick={() => this.onAvatarSelect(i)}
             >

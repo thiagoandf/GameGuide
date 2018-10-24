@@ -18,7 +18,7 @@ const styles = () => ({
 // eslint-disable-next-line react/prefer-stateless-function
 class GameGrid extends React.Component {
   likedGame(game) {
-    this.props.likes.map(id => game.id === id);
+    return !!this.props.likes[game.id];
   }
 
   render() {
@@ -65,7 +65,7 @@ GameGrid.propTypes = {
   padding: PropTypes.number,
   onClick: PropTypes.func,
   onView: PropTypes.func,
-  likes: PropTypes.array,
+  likes: PropTypes.object,
 };
 
 export default withStyles(styles)(GameGrid);
