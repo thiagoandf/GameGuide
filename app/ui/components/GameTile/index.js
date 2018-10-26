@@ -11,12 +11,11 @@ const styles = theme => ({
     width: '100%',
   },
   gameName: {
-    backgroundColor: theme.palette.common.white,
     zIndex: 199,
     position: 'absolute',
     height: '30px',
-    paddingTop: '5px',
-    paddingLeft: '10px',
+    paddingTop: theme.spacing.gg / 2,
+    paddingLeft: theme.spacing.gg,
     borderBottomLeftRadius: '5px',
     borderBottomRightRadius: '5px',
     boxShadow: '0 1px 3px rgba(0,0,0,0.16)',
@@ -64,6 +63,7 @@ class GameTile extends React.Component {
           style={{
             top: `${this.props.height - 30 || 95}px`,
             width: `${this.props.width || 125}px`,
+            backgroundColor: `${this.props.color} || #fff`,
           }}
         >
           <Typography
@@ -105,6 +105,7 @@ GameTile.propTypes = {
   onClick: PropTypes.func,
   onView: PropTypes.func,
   liked: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 export default withStyles(styles)(GameTile);

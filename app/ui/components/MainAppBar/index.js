@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 const styles = theme => ({
   appBar: {
     backgroundColor: theme.palette.primary.main,
+    top: 0,
   },
 });
 
@@ -46,7 +47,7 @@ class MainAppBar extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <IconButton
               color="inherit"
