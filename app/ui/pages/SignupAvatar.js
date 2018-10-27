@@ -8,7 +8,6 @@ import {
   ButtonBase,
 } from '@material-ui/core';
 import VerticalContainer from '../components/VerticalContainer';
-
 import Checkmark from '../images/checkmark.svg';
 
 const styles = theme => ({

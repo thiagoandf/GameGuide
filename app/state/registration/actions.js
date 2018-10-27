@@ -7,6 +7,7 @@ import ackbar from '../../api/ackbar';
 
 const domainActions = makeDomainActions(ackbar);
 
+
 export const addAvatar = avatarUrl => ({
   type: ADD_AVATAR,
   avatarUrl,
