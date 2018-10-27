@@ -5,12 +5,12 @@ import {
   Toolbar,
   Typography,
   Drawer,
-  ListSubheader,
   MenuItem,
   Divider,
   IconButton,
+  ButtonBase,
 } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { Close, List, ExitToApp } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 
@@ -28,6 +28,8 @@ const styles = theme => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });
 
@@ -86,18 +88,39 @@ class MainAppBar extends React.Component {
               <Close />
             </IconButton>
             <div className={classes.avatarWrapper}>
-              <img alt="Avatar" src={this.props.avatar} />
+              <img
+                alt="Avatar"
+                width="125px"
+                height="125px"
+                src={this.props.avatar}
+              />
             </div>
-            <Typography variant="caption">{this.props.email}</Typography>
-            <ListSubheader>Ir para:</ListSubheader>
-            <MenuItem onClick={this.handleGoToRecommendations}>
-              Recomendações
+            <div className={classes.avatarWrapper}>
+              <Typography variant="title" style={{ paddingTop: '5px' }}>
+                {this.props.email}
+              </Typography>
+              <ButtonBase onClick={this.handleGoToRecommendations}>
+                <Typography variant="caption" style={{ paddingTop: '5px' }}>
+                  Ver Perfil
+                </Typography>
+              </ButtonBase>
+            </div>
+            <MenuItem
+              onClick={this.handleGoToGameList}
+              style={{ paddingTop: '20px' }}
+            >
+              <List />
+              <Typography variant="body1" style={{ paddingLeft: '5px' }}>
+                Lista de jogos
+              </Typography>
             </MenuItem>
-            <MenuItem onClick={this.handleGoToGameList}>
-              Lista de jogos
+            <Divider style={{ marginTop: '5px', marginBottom: '5px' }} />
+            <MenuItem onClick={this.handleLogout}>
+              <ExitToApp />
+              <Typography variant="body1" style={{ paddingLeft: '5px' }}>
+                Sair
+              </Typography>
             </MenuItem>
-            <Divider />
-            <MenuItem onClick={this.handleLogout}>Sair</MenuItem>
           </div>
         </Drawer>
       </React.Fragment>

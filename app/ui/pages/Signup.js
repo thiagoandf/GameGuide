@@ -17,10 +17,9 @@ const styles = theme => ({
     maxWidth: '320px',
   },
   confirmPassword: {
-    borderColor: 'rgba(255,61,53,0.8)',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    borderRadius: '5px',
+    borderBottomColor: 'rgba(255,61,53,0.8)',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '1px',
     margin: theme.spacing.gg,
     width: '75%',
     maxWidth: '320px',

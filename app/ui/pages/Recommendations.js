@@ -18,6 +18,8 @@ class Recommendations extends React.Component {
             goToRecommendations={this.props.goToRecommendations}
             goToGameList={this.props.goToGameList}
             logout={this.props.logout}
+            email={this.props.playerEmail}
+            avatar={this.props.playerAvatar}
           />
           <Typography />
           <GameGrid
@@ -26,7 +28,7 @@ class Recommendations extends React.Component {
             maxWidth="560px"
             height="150px"
             onClick={game => {
-              console.log(game);
+              console.log(game); /* eslint-disable-line no-console */
             }}
           />
         </div>
@@ -43,6 +45,8 @@ Recommendations.propTypes = {
   logout: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
+  playerEmail: PropTypes.string,
+  playerAvatar: PropTypes.string,
 };
 
 export default Recommendations;
