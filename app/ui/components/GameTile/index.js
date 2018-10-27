@@ -63,7 +63,7 @@ class GameTile extends React.Component {
           style={{
             top: `${this.props.height - 30 || 95}px`,
             width: `${this.props.width || 125}px`,
-            backgroundColor: `${this.props.color} || #fff`,
+            backgroundColor: this.props.color || '#fff',
           }}
         >
           <Typography

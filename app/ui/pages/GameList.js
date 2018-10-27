@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles, Typography } from '@material-ui/core';
 import VerticalContainer from '../components/VerticalContainer';
 import MainAppBar from '../components/MainAppBar';
 import GameGrid from '../components/GameGrid';
 
-const styles = {
+const styles = theme => ({
   buttonStyle: {
     backgroundColor: 'transparent',
-    color: 'white',
+    color: theme.palette.common.white,
     fontWeight: 50,
     paddingTop: 12,
     height: 40,
@@ -33,14 +34,15 @@ const styles = {
     marginTop: '-30%',
   },
   root: {
+    paddingTop: '60px',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
-    height: '100%',
+    height: '100vh',
   },
-};
+});
 
 class GameList extends React.Component {
   componentDidMount() {
@@ -49,6 +51,7 @@ class GameList extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <VerticalContainer>
         <div style={{ maxWidth: '100%', minWidth: '100%' }}>
@@ -56,14 +59,17 @@ class GameList extends React.Component {
             goToRecommendations={this.props.goToRecommendations}
             goToGameList={this.props.goToGameList}
             logout={this.props.logout}
+            email={this.props.playerEmail}
+            avatar={this.props.playerAvatar}
           />
-          <div style={styles.root}>
+          <div className={classes.root}>
+            <Typography variant="title">Todos os jogos</Typography>
             <GameGrid
               gameList={this.props.gameList}
               width="100%"
-              height="40vh"
+              height="100%"
               maxWidth="720px"
-              maxHeight="400px"
+              maxHeight="100%"
               onClick={game => this.props.likeGame(game.id)}
               onView={game => this.props.goToGameDetail(game.id)}
               likes={this.props.playerLikedGames}
@@ -76,6 +82,9 @@ class GameList extends React.Component {
 }
 
 GameList.propTypes = {
+  classes: PropTypes.object,
+  playerEmail: PropTypes.any,
+  playerAvatar: PropTypes.any,
   gameList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -98,4 +107,4 @@ GameList.propTypes = {
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
 };
 
-export default GameList;
+export default withStyles(styles)(GameList);

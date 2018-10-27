@@ -10,10 +10,16 @@ import {
   selectPlayerLikedGames,
 } from '../../state/domain/selectors';
 import GameList from '../../ui/pages/GameList';
+import {
+  selectPlayerAvatar,
+  selectPlayerEmail,
+} from '../../state/registration/selectors';
 
 const domainActions = makeDomainActions(ackbar);
 
 const mapStateToProps = createStructuredSelector({
+  playerAvatar: selectPlayerAvatar,
+  playerEmail: selectPlayerEmail,
   gameList: selectGames,
   player: selectPlayer,
   playerLikedGames: selectPlayerLikedGames,
