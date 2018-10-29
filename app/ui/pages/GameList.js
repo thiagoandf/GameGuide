@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Typography } from '@material-ui/core';
+import {
+  withStyles,
+  Typography,
+  Input,
+  InputAdornment,
+} from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import VerticalContainer from '../components/VerticalContainer';
 import MainAppBar from '../components/MainAppBar';
 import GameGrid from '../components/GameGrid';
@@ -42,9 +48,25 @@ const styles = theme => ({
     width: '100%',
     height: '100vh',
   },
+  gameListWrapper: {
+    padding: theme.spacing.gg * 2,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleWrapper: {
+    width: '100%',
+    display: 'flex',
+    padding: '20px 20px 0px 20px',
+  },
 });
 
 class GameList extends React.Component {
+  state = {
+    gameList: this.props.gameList,
+  };
   componentDidMount() {
     this.props.requestGameList();
     this.props.requestPlayerInfo();
@@ -54,26 +76,48 @@ class GameList extends React.Component {
     const { classes } = this.props;
     return (
       <VerticalContainer>
-        <div style={{ maxWidth: '100%', minWidth: '100%' }}>
-          <MainAppBar
-            goToRecommendations={this.props.goToRecommendations}
-            goToGameList={this.props.goToGameList}
-            logout={this.props.logout}
-            email={this.props.playerEmail}
-            avatar={this.props.playerAvatar}
-          />
+        <MainAppBar
+          goToRecommendations={this.props.goToRecommendations}
+          goToGameList={this.props.goToGameList}
+          logout={this.props.logout}
+          email={this.props.playerEmail}
+          avatar={this.props.playerAvatar}
+        />
+        <div style={{ width: '100%' }}>
           <div className={classes.root}>
-            <Typography variant="title">Todos os jogos</Typography>
-            <GameGrid
-              gameList={this.props.gameList}
-              width="100%"
-              height="100%"
-              maxWidth="720px"
-              maxHeight="100%"
-              onClick={game => this.props.likeGame(game.id)}
-              onView={game => this.props.goToGameDetail(game.id)}
-              likes={this.props.playerLikedGames}
-            />
+            <div className={classes.titleWrapper}>
+              <Typography variant="title">Todos os jogos</Typography>
+            </div>
+            <div className={classes.gameListWrapper}>
+              <Input
+                style={{ width: '60%', marginBottom: '20px' }}
+                placeholder="Pesquisa"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                }
+                onChange={e => {
+                  this.setState({
+                    gameList: this.props.gameList.filter(game =>
+                      game.name
+                        .toUpperCase()
+                        .includes(e.target.value.toUpperCase()),
+                    ),
+                  });
+                }}
+              />
+              <GameGrid
+                gameList={this.state.gameList}
+                width="100%"
+                height="400px"
+                maxWidth="720px"
+                maxHeight="100%"
+                onClick={game => this.props.likeGame(game.id)}
+                onView={game => this.props.goToGameDetail(game.id)}
+                likes={this.props.playerLikedGames}
+              />
+            </div>
           </div>
         </div>
       </VerticalContainer>
@@ -97,7 +141,7 @@ GameList.propTypes = {
       coverImage: PropTypes.string,
     }),
   ),
-  playerLikedGames: PropTypes.array.isRequired,
+  playerLikedGames: PropTypes.object.isRequired,
   requestPlayerInfo: PropTypes.func.isRequired,
   requestGameList: PropTypes.func.isRequired,
   goToRecommendations: PropTypes.func.isRequired,

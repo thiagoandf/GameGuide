@@ -6,7 +6,9 @@ import {
   AppBar,
   Button,
   Input,
+  InputAdornment,
 } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import VerticalContainer from '../components/VerticalContainer';
 import GameGrid from '../components/GameGrid';
 
@@ -78,6 +80,12 @@ class SignupHistory extends React.Component {
           </Typography>
         </div>
         <Input
+          placeholder="Pesquisa"
+          startAdornment={
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          }
           onChange={e => {
             this.setState({
               gameList: this.props.gameList.filter(game =>
