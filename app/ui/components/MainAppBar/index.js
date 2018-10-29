@@ -5,17 +5,31 @@ import {
   Toolbar,
   Typography,
   Drawer,
-  ListSubheader,
   MenuItem,
   Divider,
   IconButton,
+  ButtonBase,
 } from '@material-ui/core';
+import { Close, List, ExitToApp } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 
 const styles = theme => ({
   appBar: {
     backgroundColor: theme.palette.primary.main,
+    top: 0,
+  },
+  drawer: {
+    width: '250px',
+    backgroundColor: theme.palette.common.white,
+    height: '100%',
+  },
+  avatarWrapper: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });
 
@@ -46,7 +60,7 @@ class MainAppBar extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -56,18 +70,58 @@ class MainAppBar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              GameGuide
+              Game Guide
             </Typography>
           </Toolbar>
         </AppBar>
         <Drawer open={this.state.open} onClose={this.handleToggle}>
-          <ListSubheader>Ir para:</ListSubheader>
-          <MenuItem onClick={this.handleGoToRecommendations}>
-            Recomendações
-          </MenuItem>
-          <MenuItem onClick={this.handleGoToGameList}>Lista de jogos</MenuItem>
-          <Divider />
-          <MenuItem onClick={this.handleLogout}>Sair</MenuItem>
+          <div className={classes.drawer}>
+            <IconButton
+              onClick={this.handleToggle}
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                width: '100%',
+                padding: '10px',
+              }}
+            >
+              <Close />
+            </IconButton>
+            <div className={classes.avatarWrapper}>
+              <img
+                alt="Avatar"
+                width="125px"
+                height="125px"
+                src={this.props.avatar}
+              />
+            </div>
+            <div className={classes.avatarWrapper}>
+              <Typography variant="title" style={{ paddingTop: '5px' }}>
+                {this.props.email}
+              </Typography>
+              <ButtonBase onClick={this.handleGoToRecommendations}>
+                <Typography variant="caption" style={{ paddingTop: '5px' }}>
+                  Ver Perfil
+                </Typography>
+              </ButtonBase>
+            </div>
+            <MenuItem
+              onClick={this.handleGoToGameList}
+              style={{ paddingTop: '20px' }}
+            >
+              <List />
+              <Typography variant="body1" style={{ paddingLeft: '5px' }}>
+                Lista de jogos
+              </Typography>
+            </MenuItem>
+            <Divider style={{ marginTop: '5px', marginBottom: '5px' }} />
+            <MenuItem onClick={this.handleLogout}>
+              <ExitToApp />
+              <Typography variant="body1" style={{ paddingLeft: '5px' }}>
+                Sair
+              </Typography>
+            </MenuItem>
+          </div>
         </Drawer>
       </React.Fragment>
     );
@@ -75,6 +129,8 @@ class MainAppBar extends React.Component {
 }
 
 MainAppBar.propTypes = {
+  email: PropTypes.string,
+  avatar: PropTypes.string,
   goToRecommendations: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,

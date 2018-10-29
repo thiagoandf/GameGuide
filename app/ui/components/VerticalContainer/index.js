@@ -13,6 +13,7 @@ const styles = theme => ({
     maxWidth: '100%',
     minWidth: '100%',
     minHeight: '100vh',
+    overflowY: 'hidden',
   },
 });
 

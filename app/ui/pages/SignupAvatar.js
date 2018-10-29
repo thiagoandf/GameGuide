@@ -8,8 +8,6 @@ import {
   ButtonBase,
 } from '@material-ui/core';
 import VerticalContainer from '../components/VerticalContainer';
-
-import User from '../images/user.svg';
 import Checkmark from '../images/checkmark.svg';
 
 const styles = theme => ({
@@ -91,31 +89,33 @@ const styles = theme => ({
 
 class SignupAvatar extends React.Component {
   state = {
-    selectedAvatar: null,
+    selectedAvatar: {
+      index: null,
+      url: '',
+    },
   };
-  onAvatarSelect = i => {
-    this.setState({ selectedAvatar: i });
+  onAvatarSelect = (a, i) => {
+    this.setState({
+      selectedAvatar: { url: a, index: i },
+    });
   };
 
   continue = () => {
-    this.props.addAvatar(this.state.selectedAvatar);
+    this.props.addAvatar(this.state.selectedAvatar.url);
   };
 
   render() {
     const { classes } = this.props;
     const avatars = [
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
-      User,
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656115/man-4.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656115/boy.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656115/boy-2.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656116/man-2.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656116/girl.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656117/man-5.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656118/man-3.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656118/girl-2.svg',
+      'https://res.cloudinary.com/dt8uln994/image/upload/v1540656117/man.svg',
     ];
     return (
       <VerticalContainer>
@@ -138,10 +138,11 @@ class SignupAvatar extends React.Component {
         <div className={classes.avatarWrapper}>
           {avatars.map((a, i) => (
             <ButtonBase
+              key={Math.random()}
               style={{ borderRadius: '35px' }}
-              onClick={() => this.onAvatarSelect(i)}
+              onClick={() => this.onAvatarSelect(a, i)}
             >
-              {this.state.selectedAvatar === i && (
+              {this.state.selectedAvatar.index === i && (
                 <img
                   className={classes.checkmark}
                   src={Checkmark}
