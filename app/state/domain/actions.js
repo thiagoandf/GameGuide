@@ -131,7 +131,7 @@ export default ({
       weeklyPlayTime,
     ).then(({ token }) => {
       dispatch(loadToken(token));
-      dispatch(push('/games'));
+      dispatch(push('/playHistory'));
     });
   };
 
