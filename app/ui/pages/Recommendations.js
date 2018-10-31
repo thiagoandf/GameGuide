@@ -32,6 +32,7 @@ class Recommendations extends React.Component {
   componentDidMount() {
     this.props.requestGameList();
     this.props.requestRecommendations();
+    this.props.loadUserInfo();
   }
   render() {
     const { classes } = this.props;
@@ -76,7 +77,7 @@ class Recommendations extends React.Component {
           </div>
           <div className={classes.recommendationWrapper}>
             <Typography variant="subheading" className={classes.sectionTitles}>
-              Wishlist
+              Tenho
             </Typography>
             <div
               style={{
@@ -113,6 +114,7 @@ Recommendations.propTypes = {
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
   playerEmail: PropTypes.string,
   playerAvatar: PropTypes.string,
+  loadUserInfo: PropTypes.func,
 };
 
 export default withStyles(styles)(Recommendations);

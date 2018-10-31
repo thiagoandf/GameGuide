@@ -3,6 +3,7 @@ import {
   LOAD_TOKEN,
   ADD_RELATIONSHIP,
   UPDATE_RELATIONSHIP,
+  LOAD_USER_INFO,
 } from '../constants';
 
 const initialState = {
@@ -11,6 +12,8 @@ const initialState = {
   likedGames: {},
   ownedGames: {},
   recommendedGames: [],
+  email: '',
+  avatarUrl: '',
 };
 
 function playerReducer(state = initialState, action) {
@@ -42,6 +45,8 @@ function playerReducer(state = initialState, action) {
       return { ...state, recommendedGames: action.recommendations };
     case LOAD_TOKEN:
       return { ...state, token: action.token };
+    case LOAD_USER_INFO:
+      return { ...state, email: action.email, avatarUrl: action.avatarUrl };
     default:
       return state;
   }
