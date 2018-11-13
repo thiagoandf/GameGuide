@@ -70,6 +70,7 @@ class GameList extends React.Component {
   componentDidMount() {
     this.props.requestGameList();
     this.props.requestPlayerInfo();
+    this.props.loadUserInfo();
   }
 
   render() {
@@ -147,6 +148,7 @@ GameList.propTypes = {
   goToRecommendations: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  loadUserInfo: PropTypes.func,
   likeGame: PropTypes.func.isRequired, // eslint-disable-line
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
 };

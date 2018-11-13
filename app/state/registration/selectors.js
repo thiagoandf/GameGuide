@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
 
-const selectDomain = state => state.registration;
+const selectDomain = state => state.domain.player;
 
 export const selectPlayerAvatar = createSelector(
   selectDomain,
-  registration => registration.avatarUrl,
+  player => player.avatarUrl,
 );
 
 export const selectPlayerEmail = createSelector(
   selectDomain,
-  registration => registration.email,
+  player => player.email,
 );

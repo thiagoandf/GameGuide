@@ -6,6 +6,7 @@ import {
   LOAD_TOKEN,
   UPDATE_RELATIONSHIP,
   LOAD_CUSTOMER_INFO,
+  LOAD_USER_INFO,
 } from './constants';
 import { selectPlayerToken } from './selectors';
 
@@ -147,7 +148,15 @@ export default ({
     info,
   });
 
+  const loadUserInfo = () => (dispatch, getState) => {
+    const token = selectPlayerToken(getState());
+    getPlayerInfo(token)
+      .then(info => dispatch({ type: LOAD_USER_INFO, info }))
+      .catch(() => {});
+  };
+
   return {
+    loadUserInfo,
     requestGameList,
     requestCustomerInfo,
     viewGame,

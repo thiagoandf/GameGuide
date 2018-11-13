@@ -26,6 +26,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
+  loadUserInfo: () => dispatch(domainActions.loadUserInfo()),
   requestPlayerInfo: () => dispatch(domainActions.requestPlayerInfo()),
   requestGameList: () => dispatch(domainActions.requestGameList()),
   likeGame: id => dispatch(domainActions.likeGame(id)),
