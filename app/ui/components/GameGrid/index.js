@@ -38,6 +38,7 @@ class GameGrid extends React.Component {
         {this.props.gameList.map(game => (
           <div key={game.name} style={{ padding: '10px' }}>
             <GameTile
+              color={this.props.color}
               game={game}
               rightButton
               onView={() => {
@@ -66,6 +67,7 @@ GameGrid.propTypes = {
   onClick: PropTypes.func,
   onView: PropTypes.func,
   likes: PropTypes.object,
+  color: PropTypes.string,
 };
 
 export default withStyles(styles)(GameGrid);

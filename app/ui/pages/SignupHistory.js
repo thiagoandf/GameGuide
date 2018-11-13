@@ -6,7 +6,9 @@ import {
   AppBar,
   Button,
   Input,
+  InputAdornment,
 } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import VerticalContainer from '../components/VerticalContainer';
 import GameGrid from '../components/GameGrid';
 
@@ -51,9 +53,9 @@ class SignupHistory extends React.Component {
     gameList: this.props.gameList,
   };
 
-  nextPage = () => {
-    this.props.nextPage();
-  };
+  nextPage() {
+    this.props.goNext();
+  }
 
   render() {
     const { classes } = this.props;
@@ -78,6 +80,12 @@ class SignupHistory extends React.Component {
           </Typography>
         </div>
         <Input
+          placeholder="Pesquisa"
+          startAdornment={
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          }
           onChange={e => {
             this.setState({
               gameList: this.props.gameList.filter(game =>
@@ -98,7 +106,10 @@ class SignupHistory extends React.Component {
             likes={this.props.playerLikedGames}
           />
         </div>
-        <Button className={classes.continueButton} onClick={this.nextPage}>
+        <Button
+          className={classes.continueButton}
+          onClick={() => this.props.goNext()}
+        >
           <Typography variant="body1" className={classes.continueButtonText}>
             Continuar
           </Typography>
@@ -124,7 +135,7 @@ SignupHistory.propTypes = {
   requestGameList: PropTypes.func.isRequired,
   likeGame: PropTypes.func.isRequired,
   classes: PropTypes.any,
-  nextPage: PropTypes.func,
+  goNext: PropTypes.func,
   requestPlayerInfo: PropTypes.func.isRequired,
   playerLikedGames: PropTypes.object,
 };
