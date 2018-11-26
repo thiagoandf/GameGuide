@@ -51,6 +51,11 @@ class MainAppBar extends React.Component {
     this.props.goToGameList();
   };
 
+  handleGoToReports = () => {
+    this.setState({ open: false });
+    this.props.goToReports();
+  };
+
   handleLogout = () => {
     this.setState({ open: false });
     this.props.logout();
@@ -114,6 +119,17 @@ class MainAppBar extends React.Component {
                 Lista de jogos
               </Typography>
             </MenuItem>
+            {this.props.reports && (
+              <MenuItem
+                onClick={this.handleGoToReports}
+                style={{ paddingTop: '20px' }}
+              >
+                <List />
+                <Typography variant="body1" style={{ paddingLeft: '5px' }}>
+                  Relatórios
+                </Typography>
+              </MenuItem>
+            )}
             <Divider style={{ marginTop: '5px', marginBottom: '5px' }} />
             <MenuItem onClick={this.handleLogout}>
               <ExitToApp />
@@ -135,6 +151,8 @@ MainAppBar.propTypes = {
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   classes: PropTypes.object,
+  reports: PropTypes.object,
+  goToReports: PropTypes.func,
 };
 
 export default withStyles(styles)(MainAppBar);

@@ -45,6 +45,8 @@ class Recommendations extends React.Component {
             logout={this.props.logout}
             email={this.props.playerEmail}
             avatar={this.props.playerAvatar}
+            goToReports={this.props.goToReports}
+            reports={this.props.reports.length > 0}
           />
           <Typography />
           <div className={classes.profileImage}>
@@ -111,10 +113,12 @@ Recommendations.propTypes = {
   goToRecommendations: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
+  goToReports: PropTypes.func.isRequired,
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
   playerEmail: PropTypes.string,
   playerAvatar: PropTypes.string,
   loadUserInfo: PropTypes.func,
+  reports: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default withStyles(styles)(Recommendations);
