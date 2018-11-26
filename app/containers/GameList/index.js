@@ -8,6 +8,7 @@ import {
   selectGames,
   selectPlayer,
   selectPlayerLikedGames,
+  selectReports,
 } from '../../state/domain/selectors';
 import GameList from '../../ui/pages/GameList';
 import {
@@ -23,6 +24,7 @@ const mapStateToProps = createStructuredSelector({
   gameList: selectGames,
   player: selectPlayer,
   playerLikedGames: selectPlayerLikedGames,
+  reports: selectReports,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
   likeGame: id => dispatch(domainActions.likeGame(id)),
   goToRecommendations: () => dispatch(push('/recommendations')),
   goToGameList: () => dispatch(push('/games')),
+  goToReports: () => dispatch(push('/report')),
   goToGameDetail: gameId => dispatch(push(`/game/${gameId}`)),
   logout: () => dispatch(push('/')),
 });

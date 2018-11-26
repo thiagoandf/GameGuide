@@ -63,6 +63,7 @@ class GameDetail extends React.Component {
           />
           <VerticalContainer>
             <img
+              style={{ paddingTop: '70px' }}
               alt="GameImage"
               src={this.props.game.coverImage}
               width="240px"
@@ -116,7 +117,7 @@ class GameDetail extends React.Component {
                 </Typography>
               </div>
               <Typography variant="body1" align="justify">
-                {this.props.game.description}
+                &nbsp; {this.props.game.description}
               </Typography>
             </div>
           </VerticalContainer>

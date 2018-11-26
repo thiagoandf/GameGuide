@@ -83,6 +83,8 @@ class GameList extends React.Component {
           logout={this.props.logout}
           email={this.props.playerEmail}
           avatar={this.props.playerAvatar}
+          goToReports={this.props.goToReports}
+          reports={this.props.reports.length > 0}
         />
         <div style={{ width: '100%' }}>
           <div className={classes.root}>
@@ -146,11 +148,13 @@ GameList.propTypes = {
   requestPlayerInfo: PropTypes.func.isRequired,
   requestGameList: PropTypes.func.isRequired,
   goToRecommendations: PropTypes.func.isRequired,
+  goToReports: PropTypes.func.isRequired,
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   loadUserInfo: PropTypes.func,
   likeGame: PropTypes.func.isRequired, // eslint-disable-line
   goToGameDetail: PropTypes.func.isRequired, // eslint-disable-line
+  reports: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default withStyles(styles)(GameList);

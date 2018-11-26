@@ -1,37 +1,37 @@
-/**
- *
- * Report
- *
- */
-
-import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
+import { createStructuredSelector } from 'reselect';
+import Reports from '../../ui/pages/Reports';
+import {
+  selectPlayerAvatar,
+  selectPlayerEmail,
+} from '../../state/registration/selectors';
+import makeDomainActions from '../../state/domain/actions';
+import ackbar from '../../api/ackbar';
+import { selectReports } from '../../state/domain/selectors';
 
-function ReportPage() {
-  return (
-    <iframe
-      title="Report"
-      width="933"
-      height="700"
-      src="https://app.powerbi.com/view?r=eyJrIjoiZTEyYjA1NTMtMTlmZi00NTBkLWFkZjEtMGQ0NzQ2NmUwNzg2IiwidCI6ImJiNzFkOTQzLTA4MGQtNDMwMi1iNDkxLTFmNWFkYWQ1NzA2YSJ9"
-      frameBorder="0"
-      allowFullScreen="true"
-    />
-  );
-}
+const domainActions = makeDomainActions(ackbar);
 
-ReportPage.propTypes = {};
+const mapStateToProps = createStructuredSelector({
+  reports: selectReports,
+  playerAvatar: selectPlayerAvatar,
+  playerEmail: selectPlayerEmail,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  requestCustomerInfo: () => dispatch(domainActions.requestCustomerInfo()),
+  loadUserInfo: () => dispatch(domainActions.loadUserInfo()),
+  goToRecommendations: () => dispatch(push('/recommendations')),
+  goToGameList: () => dispatch(push('/games')),
+  goToGameDetail: gameId => dispatch(push(`/game/${gameId}`)),
+  goToReports: () => dispatch(push('/report')),
+  logout: () => dispatch(push('/')),
+});
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(ReportPage);
+export default compose(withConnect)(Reports);

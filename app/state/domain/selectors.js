@@ -13,6 +13,11 @@ export const selectPlayer = createSelector(
   domain => domain.player,
 );
 
+export const selectCustomer = createSelector(
+  selectDomain,
+  domain => domain.customer,
+);
+
 export const selectRecommendationIds = createSelector(
   selectPlayer,
   player => player.recommendedGames,
@@ -36,4 +41,9 @@ export const selectRecommendations = createSelector(
   selectRecommendationIds,
   (games, recommendations) =>
     recommendations.map(recommendation => games[recommendation]),
+);
+
+export const selectReports = createSelector(
+  selectCustomer,
+  customer => customer.reports,
 );
