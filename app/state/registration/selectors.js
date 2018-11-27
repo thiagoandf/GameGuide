@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectDomain = state => state.domain.player;
+const selectDomain = state => state.registration;
 
 export const selectPlayerAvatar = createSelector(
   selectDomain,
