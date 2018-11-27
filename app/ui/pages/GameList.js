@@ -84,7 +84,7 @@ class GameList extends React.Component {
           email={this.props.playerEmail}
           avatar={this.props.playerAvatar}
           goToReports={this.props.goToReports}
-          reports={this.props.reports.length > 0}
+          reports={Object.keys(this.props.reports).length > 0}
         />
         <div style={{ width: '100%' }}>
           <div className={classes.root}>
@@ -119,6 +119,7 @@ class GameList extends React.Component {
                 onClick={game => this.props.likeGame(game.id)}
                 onView={game => this.props.goToGameDetail(game.id)}
                 likes={this.props.playerLikedGames}
+                wrap
               />
             </div>
           </div>

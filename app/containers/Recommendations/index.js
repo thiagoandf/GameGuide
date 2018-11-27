@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import ackbar from '../../api/ackbar';
 import makeDomainActions from '../../state/domain/actions';
 import {
+  selectPlayerLikedGames,
   selectRecommendations,
   selectReports,
 } from '../../state/domain/selectors';
@@ -21,6 +22,7 @@ const mapStateToProps = createStructuredSelector({
   playerAvatar: selectPlayerAvatar,
   playerEmail: selectPlayerEmail,
   reports: selectReports,
+  playerLikedGames: selectPlayerLikedGames,
 });
 
 const mapDispatchToProps = dispatch => ({

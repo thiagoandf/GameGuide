@@ -10,7 +10,7 @@ import {
   IconButton,
   ButtonBase,
 } from '@material-ui/core';
-import { Close, List, ExitToApp } from '@material-ui/icons';
+import { Close, List, ExitToApp, Assessment } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 
@@ -124,7 +124,7 @@ class MainAppBar extends React.Component {
                 onClick={this.handleGoToReports}
                 style={{ paddingTop: '20px' }}
               >
-                <List />
+                <Assessment />
                 <Typography variant="body1" style={{ paddingLeft: '5px' }}>
                   Relatórios
                 </Typography>
@@ -151,7 +151,7 @@ MainAppBar.propTypes = {
   goToGameList: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   classes: PropTypes.object,
-  reports: PropTypes.object,
+  reports: PropTypes.bool,
   goToReports: PropTypes.func,
 };
 

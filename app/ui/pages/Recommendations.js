@@ -46,7 +46,7 @@ class Recommendations extends React.Component {
             email={this.props.playerEmail}
             avatar={this.props.playerAvatar}
             goToReports={this.props.goToReports}
-            reports={this.props.reports.length > 0}
+            reports={Object.keys(this.props.reports).length > 0}
           />
           <Typography />
           <div className={classes.profileImage}>
@@ -69,34 +69,15 @@ class Recommendations extends React.Component {
             />
             <GameGrid
               gameList={this.props.recommendedGames}
-              width="90%"
+              likes={this.props.playerLikedGames}
+              maxHeight="100%"
+              onClick={() => {}}
+              onView={game => this.props.goToGameDetail(game.id)}
+              width="100%"
               maxWidth="560px"
-              height="125px"
-              onClick={game => {
-                console.log(game); /* eslint-disable-line no-console */
-              }}
-            />
-          </div>
-          <div className={classes.recommendationWrapper}>
-            <Typography variant="subheading" className={classes.sectionTitles}>
-              Tenho
-            </Typography>
-            <div
-              style={{
-                width: '100%',
-                borderBottomColor: '#c4c4c4',
-                borderBottomWidth: '1px',
-                borderBottomStyle: 'solid',
-              }}
-            />
-            <GameGrid
-              gameList={this.props.recommendedGames}
-              width="90%"
-              maxWidth="560px"
-              height="125px"
-              onClick={game => {
-                console.log(game); /* eslint-disable-line no-console */
-              }}
+              height="160px"
+              additionalPadding
+              padding="0px"
             />
           </div>
         </div>
@@ -119,6 +100,7 @@ Recommendations.propTypes = {
   playerAvatar: PropTypes.string,
   loadUserInfo: PropTypes.func,
   reports: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  playerLikedGames: PropTypes.object,
 };
 
 export default withStyles(styles)(Recommendations);

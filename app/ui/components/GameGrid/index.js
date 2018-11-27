@@ -9,9 +9,8 @@ const styles = () => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    overflow: 'auto',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -30,8 +29,12 @@ class GameGrid extends React.Component {
           width: this.props.width || '250px',
           height: this.props.height || '250px',
           padding: this.props.padding || '20px',
+          paddingLeft: this.props.additionalPadding && '350px',
           maxWidth: this.props.maxWidth || '250px',
           maxHeight: this.props.maxHeight || '250px',
+          flexWrap: this.props.wrap ? 'wrap' : 'no-wrap',
+          overflowX: this.props.wrap ? 'hidden' : 'auto',
+          overflowY: this.props.wrap ? 'auto' : 'hidden',
         }}
         className={classes.root}
       >
@@ -68,6 +71,8 @@ GameGrid.propTypes = {
   onView: PropTypes.func,
   likes: PropTypes.object,
   color: PropTypes.string,
+  wrap: PropTypes.bool,
+  additionalPadding: PropTypes.bool,
 };
 
 export default withStyles(styles)(GameGrid);

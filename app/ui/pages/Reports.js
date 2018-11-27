@@ -6,13 +6,15 @@ import MainAppBar from '../components/MainAppBar';
 
 const styles = theme => ({
   textField: {
+    marginTop: theme.spacing.gg * 5,
     padding: theme.spacing.gg,
+    width: '100px',
   },
 });
 
 class Reports extends React.Component {
   state = {
-    selected: undefined,
+    selected: 0,
   };
   componentDidMount() {
     this.props.loadUserInfo();
@@ -32,28 +34,34 @@ class Reports extends React.Component {
             goToReports={this.props.goToReports}
             reports={this.props.reports.length > 0}
           />
-          {this.props.reports.length > 0 && (
+          {Object.keys(this.props.reports).length > 0 && (
             <TextField
               className={classes.textField}
               select
               value={this.state.selected}
-              onChange={e =>
+              onChange={e => {
                 this.setState({
                   selected: e.target.value,
-                })
-              }
+                });
+              }}
             >
-              {this.props.reports.map(item => (
-                <MenuItem key={item.id}>{item.id}</MenuItem>
+              {Object.keys(this.props.reports).map(item => (
+                <MenuItem key={item} value={item - 1}>
+                  {item}
+                </MenuItem>
               ))}
             </TextField>
           )}
-          {this.props.reports.length > 0 && (
+          {Object.keys(this.props.reports).length > 0 && (
             <iframe
               title="Game Guide"
               width="100%"
               height="100%"
-              src={this.props.reports[this.state.selected].reportUrl}
+              src={
+                this.props.reports[
+                  Object.keys(this.props.reports)[this.state.selected]
+                ]
+              }
               frameBorder="0"
               allowFullScreen="true"
             />
