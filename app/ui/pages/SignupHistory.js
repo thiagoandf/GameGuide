@@ -104,6 +104,7 @@ class SignupHistory extends React.Component {
             onClick={game => this.props.likeGame(game.id)}
             onView={game => this.props.likeGame(game.id)}
             likes={this.props.playerLikedGames}
+            wrap
           />
         </div>
         <Button
