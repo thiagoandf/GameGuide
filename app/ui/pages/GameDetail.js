@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, IconButton, withStyles } from '@material-ui/core';
-import {
-  Favorite,
-  FavoriteBorder,
-  PlaylistAdd,
-  PlaylistAddCheck,
-} from '@material-ui/icons';
+import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import VerticalContainer from '../components/VerticalContainer';
 import MainAppBar from '../components/MainAppBar';
 
@@ -49,6 +44,7 @@ const styles = theme => ({
 class GameDetail extends React.Component {
   componentDidMount() {
     this.props.requestGameList();
+    this.props.requestPlayerInfo();
     this.props.loadUserInfo();
   }
   render() {
@@ -60,6 +56,10 @@ class GameDetail extends React.Component {
             goToRecommendations={this.props.goToRecommendations}
             goToGameList={this.props.goToGameList}
             logout={this.props.logout}
+            email="espm@espm.br"
+            avatar="https://res.cloudinary.com/dt8uln994/image/upload/v1540656118/man-3.svg"
+            goToReports={this.props.goToReports}
+            reports={Object.keys(this.props.reports).length > 0}
           />
           <VerticalContainer>
             <img
@@ -88,18 +88,6 @@ class GameDetail extends React.Component {
                     <Favorite style={{ fill: '#F16567' }} />
                   ) : (
                     <FavoriteBorder />
-                  )}
-                </IconButton>
-                <IconButton
-                  className={classes.iconButton}
-                  onClick={() => {
-                    this.props.likeGame(this.props.game.id);
-                  }}
-                >
-                  {this.props.playerLikedGames[this.props.game.id] ? (
-                    <PlaylistAddCheck />
-                  ) : (
-                    <PlaylistAdd />
                   )}
                 </IconButton>
               </div>
@@ -147,6 +135,9 @@ GameDetail.propTypes = {
   logout: PropTypes.func.isRequired,
   playerLikedGames: PropTypes.array,
   likeGame: PropTypes.func,
+  requestPlayerInfo: PropTypes.func,
+  goToReports: PropTypes.func,
+  reports: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 GameDetail.defaultProps = {
